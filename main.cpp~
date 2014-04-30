@@ -17,11 +17,48 @@ Mat toGray(Mat img){
 			
 			int idxGray = y*grayStep + x;
 			int idxImg = y*imgStep + x*3;
-			grayPtr[idxGray] = ((float)imgPtr[idxImg]+(float)imgPtr[idxImg+1]+(float)imgPtr[idxImg+2])/(3.0*255);
+			grayPtr[idxGray] = ((float)imgPtr[idxImg]+(float)imgPtr[idxImg+1]+(float)imgPtr[idxImg+2])/(3.0);
 		}
 	}
 	
 	return grayImg;
+}
+
+Mat lap(Mat img,int direction){
+
+
+	//We only need one channel
+	Mat gradImg(img.rows, img.cols,CV_32FC1);
+	
+	float * gradPtr = (float *)gradImg.data;
+	
+	float * imgPtr = (float *) img.data;
+	int grayStep = gradImg.step/sizeof(float);
+	
+	cout << grayStep << "GS" << endl;
+	
+	if(direction % 2){
+		//Loop over the image pixels. Convert to float to avoid precision issues.
+		for(int  y = 1; y < img.rows-1; y++){
+			for(int  x = 1; x < img.cols-1; x++){
+			
+				int idx = y*grayStep + x;
+				gradPtr[idx] = gradPtr[idx+1] + gradPtr[idx-1] - 2*gradPtr[idx];
+			}
+		}
+	}
+	else{
+		//Loop over the image pixels. Convert to float to avoid precision issues.
+		for(int  y = 1; y < img.rows-1; y++){
+			for(int  x = 1; x < img.cols-1; x++){
+			
+				int idx = y*grayStep + x;
+				gradPtr[idx] = gradPtr[idx+grayStep] + gradPtr[idx-grayStep] - 2*gradPtr[idx];
+			}
+		}
+	}
+	
+	return gradImg;
 }
 	
 int main()
@@ -51,30 +88,40 @@ int main()
 		grayStack[i] = grayImg;
 		
 		
+		
 		//Get the gradients
-		Mat grad_x;
-		Mat grad_y;
+		Mat grad_x = lap(grayStack[i],0);
+		Mat grad_y = lap(grayStack[i],1);
+		/*
+		Mat grad;
 		
 		//Gradient X
 		int ddepth = grayStack[i].depth();
-		int deriv_x = 1; 	//order of the x derivative.
+		int deriv_x = 2; 	//order of the x derivative.
 		int deriv_y = 0; 	//order of the y derivative.
-		int ksz =5;			//Size of the kernel.
+		int ksz =13;			//Size of the kernel.
+		int scale=1;
 		
 		
 		Sobel(grayStack[i],grad_x,ddepth,deriv_x,deriv_y,ksz); 
+		//Laplacian(grayStack[i],grad_x,ddepth,ksz); */
 		abs(grad_x);
 		
 		//Gradient X
-		deriv_x = 0; 		//order of the x derivative.
-		deriv_y = 1; 		//order of the y derivative.
-		Sobel(grayStack[i],grad_y,ddepth,deriv_x,deriv_y,ksz); 
+		//deriv_x = 0; 		//order of the x derivative.
+		//deriv_y = 1; 		//order of the y derivative.
+		//Sobel(grayStack[i],grad_y,ddepth,deriv_x,deriv_y,ksz); 
+		//Laplacian(grayStack[i],grad,ddepth,ksz);
 		abs(grad_y);
+		//abs(grad);
 		
 		//Total gradient (approximate)
 		Mat gradAbs;
 		addWeighted(grad_x,0.5,grad_y,0.5,0.0,gradAbs);
+		
+		//Canny(grayStack[i],grad,50,200,3,true);
 		gradStack[i] = gradAbs;
+		//gradStack[i] = grad;
 		
 		
 		namedWindow(buffer,WINDOW_AUTOSIZE);
@@ -110,10 +157,11 @@ int main()
 				if(currImgPtr[idx] > grad){
 					grad  = currImgPtr[idx];
 					maxK = k;
+					//cout << k << " k" << endl;
 				}
 			}
 			
-			focusMapPtr[idx] = maxK*10;
+			focusMapPtr[idx] = maxK*4;
 			
 		}
 	}
