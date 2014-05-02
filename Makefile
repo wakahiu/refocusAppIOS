@@ -13,7 +13,7 @@ LINK_GPU = -lIlmImf -lImath -lHalf
 
 #compiling
 main:
-	$(COMPILER) $(SRC_CPP) $(LINK) $(LINK_NONFREE) $(INCLUDE) $(FLAGS_CPP) $(EXE)
+	$(COMPILER) $(SRC_CPP) $(LINK) $(INCLUDE) $(FLAGS_CPP) $(EXE)
 	
 run:
 	@echo "running the program"
