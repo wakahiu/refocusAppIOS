@@ -231,9 +231,10 @@ int main()
 	setMouseCallback("result", CallBackFunc, NULL);
 	imshow("result",imageStack[0]);
 
-	int index=0;
-	int value;
-
+	int previos=0;
+	int current=0;
+	int step;
+	int i;
 	//press ctrl+ mouse click to exit
 	while(1)
 	{
@@ -243,10 +244,40 @@ int main()
 			return 0;
 	
 		cout<<"coords found:  "<<endl<<x_coord<<endl<<y_coord<<endl;
-		value=focusMap.at<uchar>(y_coord,x_coord);
-		cout<<endl<<value<<endl;
+		current=focusMap.at<uchar>(y_coord,x_coord);
+		
+		step=current-previos;
 
-		imshow("result",imageStack[value]);	
+		if(step<1)
+		{
+			for(i=previos; i>=current;i--)
+			{
+				imshow("result",imageStack[i]);	
+				cvWaitKey(2);
+			}
+			
+		}
+			
+		else
+		{
+			for(i=previos; i<=current; i++)
+			{
+				imshow("result",imageStack[i]);	
+				cvWaitKey(2);
+			}
+			
+			
+		}
+			
+
+		cout<<endl<<step<<endl;
+
+		
+
+
+		previos=current;
+
+		
 		x_coord=-1;
 		y_coord =-1;	
 		while (x_coord == -1 && y_coord == -1) cvWaitKey(100); 
