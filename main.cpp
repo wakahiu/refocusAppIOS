@@ -1,6 +1,9 @@
 #include "commonHeaders.h"
 
 
+int x_coord=-1;
+int y_coord=-1;
+
 Mat toGray(Mat img){
 
 
@@ -50,6 +53,26 @@ Mat lap_dir(Mat img, int direction)
 	return img_filtered;
 
 }
+
+void CallBackFunc(int event, int x, int y, int flags, void* userdata)
+{
+     if  ( event == EVENT_LBUTTONDOWN )
+     {
+          cout << "Left button of the mouse is clicked - position (" << x << ", " << y << ")" << endl;
+          x_coord=x;
+     	  y_coord=y;
+     }
+
+      if ( flags == (EVENT_FLAG_CTRLKEY + EVENT_FLAG_LBUTTON) )
+     {
+          cout << "Left mouse button is clicked while pressing CTRL key - position (" << x << ", " << y << ")" << endl;
+          x_coord=0;
+     	  y_coord=0;
+     }
+     
+
+}
+
 	
 int main()
 {
@@ -112,18 +135,27 @@ int main()
 		Mat modLaplacian;
 		addWeighted(lap_x,1,lap_y,1,0.0,modLaplacian);
 		
-		Size ksize(9,9);
-		float sigma = 10.0;
-		Mat modLapSmooth;
-		GaussianBlur(modLaplacian,modLapSmooth,ksize,sigma);
+
+		// commented out-- Sid
+		// Size ksize(9,9);
+		// float sigma = 10.0;
+		// Mat modLapSmooth;
+		// GaussianBlur(modLaplacian,modLapSmooth,ksize,sigma);
+
 		
+
+		//siddhartha - 2-May
+
 		//locally boosting all pixel intensities based on a 3X3 neighborhood
-		//Mat boosted( rows, cols, CV_32FC1);
-		//filter2D(modLaplacian, boosted, -1, boostingFilter);
+		Mat boosted;
+		filter2D(modLaplacian, boosted, -1, boostingFilter);
+
 		
-		//averaging values of the focal measure
-		//Mat focal_measure_avg;
-		//boxFilter(boosted, focal_measure_avg,-1, [19 19]);		//TODO
+		//averaging values of the focal measure: average filter preferred ouver gaussian filter as gaussian does not resolve the issue of noisy patches
+		Size ksize(19,19);
+		Mat modLapSmooth;
+		boxFilter(boosted,modLapSmooth,-1,ksize);
+		
 
 		focal_Measure[i]=modLapSmooth;
 		
@@ -134,9 +166,6 @@ int main()
 		imshow(buffer,modLapSmooth);
 		waitKey(0);
 
-		
-		
-	
 	
 	}
 
@@ -161,8 +190,6 @@ int main()
 	int  maxK;
 	double maxVal;
 	double tempVal;
-
-	cout<<"start"<<endl;
 	
 
 	for(int y = 0; y < rows; y++)
@@ -183,20 +210,47 @@ int main()
 	 				maxVal=tempVal;
 	 			}
 	  		}
-	  		focusMap.at<uchar>(y,x)=maxK*10;		//TODO take out this scale factor. For visialization and debug	
+	  		focusMap.at<uchar>(y,x)=maxK;		//TODO take out this scale factor. For visialization and debug	
 	  	}
 			
  	}
 
+ 	//commenting out- Sid ; taken care of smoothing by forming modLapsmooth
 	//Focus does not change rapidly among objects. 
 	//Smooth it!
-	Size ksize(9,9);
-	float sigma = 12.0;
-	Mat focusMapSmooth;
-	GaussianBlur(focusMap,focusMapSmooth,ksize,sigma);
+	// Size ksize(9,9);
+	// float sigma = 12.0;
+	// Mat focusMapSmooth;
+	// GaussianBlur(focusMap,focusMapSmooth,ksize,sigma);
 	
 	namedWindow("focusMap",WINDOW_AUTOSIZE);
-	imshow("focusMap",focusMapSmooth);
+	imshow("focusMap",focusMap);
 	waitKey(0);
+
+	namedWindow("result",WINDOW_AUTOSIZE);
+	setMouseCallback("result", CallBackFunc, NULL);
+	imshow("result",imageStack[0]);
+
+	int index=0;
+	int value;
+
+	//press ctrl+ mouse click to exit
+	while(1)
+	{
+		while (x_coord == -1 && y_coord == -1) cvWaitKey(100); 
+
+		if(x_coord==0)
+			return 0;
+	
+		cout<<"coords found:  "<<endl<<x_coord<<endl<<y_coord<<endl;
+		value=focusMap.at<uchar>(y_coord,x_coord);
+		cout<<endl<<value<<endl;
+
+		imshow("result",imageStack[value]);	
+		x_coord=-1;
+		y_coord =-1;	
+		while (x_coord == -1 && y_coord == -1) cvWaitKey(100); 
+	}
+
 	return 0;
 }
