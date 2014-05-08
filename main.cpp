@@ -4,6 +4,28 @@
 int x_coord=-1;
 int y_coord=-1;
 
+//Plots a green dot around point (x,y)
+void plot(Mat img,int x,int y,int b, int g, int r){
+	
+	int k=10;
+	unsigned char * imgPtr = (unsigned char *)img.data;
+	
+	for(int j = y-k; j < y+k; j++){
+		for(int i = x-k; i < x+k; i++ ){
+		
+			//Bounds check
+			if( j < 0 || j >= img.rows || i < 0 || i >= img.cols){
+				continue;
+			}
+	
+			imgPtr[img.step*j+i*3+0] = b;
+			imgPtr[img.step*j+i*3+1] = g;
+			imgPtr[img.step*j+i*3+2] = r;
+		}
+	}
+	
+}
+
 Mat toGray(Mat img){
 
 
@@ -73,14 +95,160 @@ void CallBackFunc(int event, int x, int y, int flags, void* userdata)
 
 }
 
+void alignToPrevImage(Mat imgPrevUnAlligned,Mat imgNextUnAlligned, Mat imgPrev,Mat imgNext){
+		int rows=imgPrevUnAlligned.rows;
+		int cols=imgPrevUnAlligned.cols;
+		int chans=imgPrevUnAlligned.channels();
+		
+		cout << "cols " << cols << " rows " << rows <<  " chans " << chans << endl;
+		
+		unsigned char * imgPrevPtr = (unsigned char *)imgPrevUnAlligned.data;
+		unsigned char * imgNextPtr = (unsigned char *)imgNextUnAlligned.data;
+		
+		Mat imgP(rows, cols,CV_8UC3);
+		Mat imgN(rows, cols,CV_8UC3);
+		
+		int iOff = 0;
+		int jOff = 0;
+		int matchCount = 0;
+		float minDist = 512*3;
+		int blockSize = 40;
+		int Wind = 200;
+		int s = 2;
+		int jStop = (rows/s + Wind);
+		int iStop = (cols/s + Wind);
+		int jStart = (rows/s - Wind);
+		int iStart = (cols/s - Wind);
+		int jRef = (jStart + jStop)/2;
+		int iRef = (iStart + iStop)/2;
+		
+		cout << "jStart " << jStart << " iStart " << iStart << endl;
+		cout << "jRef " << jRef << " iRef " << iRef << endl;
+		cout << "jStop " << jStop << " iStop " << iStop << endl;
+		
+		//Use a patch of 20 from the next image
+		for(int j = jStart+Wind; j < jStop ; j++){
+			for(int i = iStart+Wind; i < iStop ; i++){
+			
+				float dist = 0;
+				//cout << "x ";
+				//Compute all four directions starting from center of the search window.
+				for(int jT = j-blockSize/2, jR = (jRef-blockSize/2); jT < (jRef+blockSize/2) ; jR++, jT++){
+					for(int iT = i-blockSize/2, iR = (iRef-blockSize/2); iT < (iRef+blockSize/2) ; iR++, iT++){
+						dist += abs((int)imgPrevPtr[chans*(jR*cols+iR)+0] - (int)imgNextPtr[chans*(jT*cols+iT)+0]);
+						dist += abs((int)imgPrevPtr[chans*(jR*cols+iR)+1] - (int)imgNextPtr[chans*(jT*cols+iT)+1]);
+						dist += abs((int)imgPrevPtr[chans*(jR*cols+iR)+2] - (int)imgNextPtr[chans*(jT*cols+iT)+2]);
+					}
+				}
+				//cout << dist << endl; 
+				if(dist <= minDist){
+					minDist = dist;
+					jOff += (j-jRef);
+					iOff += (i-iRef);
+					matchCount++;
+					//cout << "Found one! dist " << dist << endl;
+				}
+				
+			}
+			//cout << endl;
+		}
+		
+		//Use a patch of 20 from the next image
+		for(int j = jStart+Wind-1; j >= jStart ; j--){
+			for(int i = iStart+Wind; i < iStop ; i++){
+			
+				float dist = 0;
+				//cout << "x ";
+				//Compute all four directions starting from center of the search window.
+				for(int jT = j-blockSize/2, jR = (jRef-blockSize/2); jT < (jRef+blockSize/2) ; jR++, jT++){
+					for(int iT = i-blockSize/2, iR = (iRef-blockSize/2); iT < (iRef+blockSize/2) ; iR++, iT++){
+						dist += abs((int)imgPrevPtr[chans*(jR*cols+iR)+0] - (int)imgNextPtr[chans*(jT*cols+iT)+0]);
+						dist += abs((int)imgPrevPtr[chans*(jR*cols+iR)+1] - (int)imgNextPtr[chans*(jT*cols+iT)+1]);
+						dist += abs((int)imgPrevPtr[chans*(jR*cols+iR)+2] - (int)imgNextPtr[chans*(jT*cols+iT)+2]);
+					}
+					//cout << dist << endl; 
+					if(dist <= minDist){
+						minDist = dist;
+						jOff += (j-jRef);
+						iOff += (i-iRef);
+						matchCount++;
+						//cout << "Found one! dist " << dist << endl;
+					}
+				}
+				
+			}
+			//cout << endl;
+		}
+		
+		//Use a patch of 20 from the next image
+		for(int j = jStart+Wind; j < jStop ; j++){
+			for(int i = iStart+Wind-1; i >= iStart ; i--){
+			
+				float dist = 0;
+				//cout << "y ";
+				//Compute all four directions starting from center of the search window.
+				for(int jT = j-blockSize/2, jR = (jRef-blockSize/2); jT < (jRef+blockSize/2) ; jR++, jT++){
+					for(int iT = i-blockSize/2, iR = (iRef-blockSize/2); iT < (iRef+blockSize/2) ; iR++, iT++){
+						dist += abs((int)imgPrevPtr[chans*(jR*cols+iR)+0] - (int)imgNextPtr[chans*(jT*cols+iT)+0]);
+						dist += abs((int)imgPrevPtr[chans*(jR*cols+iR)+1] - (int)imgNextPtr[chans*(jT*cols+iT)+1]);
+						dist += abs((int)imgPrevPtr[chans*(jR*cols+iR)+2] - (int)imgNextPtr[chans*(jT*cols+iT)+2]);
+				
+					}
+				}
+				if(dist <= minDist){
+					minDist = dist;
+					jOff += (j-jRef);
+					iOff += (i-iRef);
+					matchCount++;
+					//cout << "Found one! dist " << dist << endl;
+				}
+				
+			}
+			//cout << endl;
+		}
+		
+		//Use a patch of 20 from the next image
+		for(int j = jStart+Wind-1; j >= jStart ; j--){
+			for(int i = iStart+Wind-1; i >= iStart ; i--){
+			
+				float dist = 0;
+				//cout << "z ";
+				//Compute all four directions starting from center of the search window.
+				for(int jT = j-blockSize/2, jR = (jRef-blockSize/2); jT < (jRef+blockSize/2) ; jR++, jT++){
+					for(int iT = i-blockSize/2, iR = (iRef-blockSize/2); iT < (iRef+blockSize/2) ; iR++, iT++){
+						dist += abs((int)imgPrevPtr[chans*(jR*cols+iR)+0] - (int)imgNextPtr[chans*(jT*cols+iT)+0]);
+						dist += abs((int)imgPrevPtr[chans*(jR*cols+iR)+1] - (int)imgNextPtr[chans*(jT*cols+iT)+1]);
+						dist += abs((int)imgPrevPtr[chans*(jR*cols+iR)+2] - (int)imgNextPtr[chans*(jT*cols+iT)+2]);
+					}
+				}
+				if(dist <= minDist){
+						minDist = dist;
+						jOff += (j-jRef);
+						iOff += (i-iRef);
+						matchCount++;
+						//cout << "Found one! dist " << dist << endl;
+				}
+				
+			}
+			//cout << endl;
+		}
+		
+		jOff/=matchCount;
+		iOff/=matchCount;
+		plot(imgPrevUnAlligned,iRef,jRef,0,255,0);
+		plot(imgPrevUnAlligned,iRef+iOff,jRef+jOff,0,0,255);
+		cout << "jOff " << jOff << " iOff " << iOff << endl; 
+		imgPrev.data = imgP.data;
+		imgNext.data = imgN.data;
+}
 	
 int main()
 {
 	
-	int N = 25;
-	Mat imageStack[25];
-	Mat grayStack[25];
-	Mat focal_Measure[25];
+	int N = 2;
+	Mat imageStack[N];
+	Mat grayStack[N];
+	Mat focal_Measure[N];
 	
 
 	Mat lap_x;
@@ -97,14 +265,35 @@ int main()
 	//Conversion for arithmetic precision. 
 	for(int i = 0; i < N; i++){
 		char buffer[50];
-		sprintf(buffer,"stack/frame%d.jpg",i+1);
+		sprintf(buffer,"align/img%d.jpg",i+1);
 		imageStack[i] = imread(buffer);
+		
 		
 		if(!imageStack[i].data){
 			cerr << "Could not open or find the image" << endl;
 			exit(0);
 		}
 		
+		if(i>0){
+			Mat imgPrev;
+			Mat imgNext;
+			alignToPrevImage(imageStack[i-1],imageStack[i],imgPrev,imgNext);
+			namedWindow("img1",CV_WINDOW_NORMAL);
+			imshow("img1",imageStack[i-1]);
+			namedWindow("img2",CV_WINDOW_NORMAL);
+			imshow("img2",imageStack[i]);
+			cvWaitKey(0);
+			imageStack[i-1] = imgPrev;
+			imageStack[i] = imgNext;
+		}
+		
+	}
+	
+	return 0;
+	for(int i = 0; i < N; i++){
+		
+		char buffer[50];
+		sprintf(buffer,"align/img%d.jpg",i+1);
 		int rows;
 		int cols;
 
@@ -168,7 +357,7 @@ int main()
 
 	
 	}
-
+	
 	for(int i = 0; false && i < N ; i++){
 		int u = 100;
 		int v = 200;
