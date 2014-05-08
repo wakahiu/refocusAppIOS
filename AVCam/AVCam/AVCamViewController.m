@@ -277,7 +277,7 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
 
 - (IBAction)snapStillImage:(id)sender
 {
-	dispatch_async([self sessionQueue], ^{
+	//dispatch_async([self sessionQueue], ^{
 		// Update the orientation on the still image output video connection before capturing.
 		[[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo] setVideoOrientation:[[(AVCaptureVideoPreviewLayer *)[[self previewView] layer] connection] videoOrientation]];
 		
@@ -289,26 +289,33 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
         
         //CGPoint devicePoint
         
-        for (NSUInteger i=0; i<16; i++)
+        for (int i=0; i<3; i++)
         {
+            for (int j=0; j<3; j++)
+            {
+                CGPoint devicePoint = CGPointMake(i*.33 +0.16, j*0.33+0.16);
+        
+                [self focusWithMode:AVCaptureFocusModeAutoFocus exposeWithMode:AVCaptureExposureModeAutoExpose atDevicePoint:devicePoint monitorSubjectAreaChange:YES];
             
-        CGPoint devicePoint = CGPointMake(.5, .5);
-        
-		[[self stillImageOutput] captureStillImageAsynchronouslyFromConnection:[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo] completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
-			
-			if (imageDataSampleBuffer)
-			{
-				NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
-				UIImage *image = [[UIImage alloc] initWithData:imageData];
-                [imageArray addObject:image];
-				[[[ALAssetsLibrary alloc] init] writeImageToSavedPhotosAlbum:[image CGImage] orientation:(ALAssetOrientation)[image imageOrientation] completionBlock:nil];
-			}
-		}];
+                [[self stillImageOutput] captureStillImageAsynchronouslyFromConnection:[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo] completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
+                    
+                    
+                    if (imageDataSampleBuffer)
+                    {
+                
+                        NSLog(@"entry count: %d", i);
+                        NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
+
+                        UIImage *image = [[UIImage alloc] initWithData:imageData];
+                        [imageArray addObject:image];
+                        NSLog(@"array contains %d objects", [imageArray count]);
+                        [[[ALAssetsLibrary alloc] init] writeImageToSavedPhotosAlbum:[image CGImage] orientation:(ALAssetOrientation)[image imageOrientation] completionBlock:nil];
+                
+                    }
+                }];
+            }
         }
-        
-        NSLog(@"array contains %d objects", [imageArray count]);
-        
-	});
+	//});
 }
 
 - (IBAction)focusAndExposeTap:(UIGestureRecognizer *)gestureRecognizer
@@ -317,63 +324,61 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
 	[self focusWithMode:AVCaptureFocusModeAutoFocus exposeWithMode:AVCaptureExposureModeAutoExpose atDevicePoint:devicePoint monitorSubjectAreaChange:YES];
 }
 
-- (void)subjectAreaDidChange:(NSNotification *)notification
-{
-	CGPoint devicePoint = CGPointMake(.5, .5);
-	[self focusWithMode:AVCaptureFocusModeContinuousAutoFocus exposeWithMode:AVCaptureExposureModeContinuousAutoExposure atDevicePoint:devicePoint monitorSubjectAreaChange:NO];
-}
+//- (void)subjectAreaDidChange:(NSNotification *)notification
+//{
+	//CGPoint devicePoint = CGPointMake(.5, .5);
+	//[self focusWithMode:AVCaptureFocusModeContinuousAutoFocus exposeWithMode:AVCaptureExposureModeContinuousAutoExposure atDevicePoint:devicePoint monitorSubjectAreaChange:NO];
+//}
 
 #pragma mark File Output Delegate
 
-- (void)captureOutput:(AVCaptureFileOutput *)captureOutput didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL fromConnections:(NSArray *)connections error:(NSError *)error
-{
-	if (error)
-		NSLog(@"%@", error);
-	
-	[self setLockInterfaceRotation:NO];
-	
-	// Note the backgroundRecordingID for use in the ALAssetsLibrary completion handler to end the background task associated with this recording. This allows a new recording to be started, associated with a new UIBackgroundTaskIdentifier, once the movie file output's -isRecording is back to NO — which happens sometime after this method returns.
-	UIBackgroundTaskIdentifier backgroundRecordingID = [self backgroundRecordingID];
-	[self setBackgroundRecordingID:UIBackgroundTaskInvalid];
-	
-	[[[ALAssetsLibrary alloc] init] writeVideoAtPathToSavedPhotosAlbum:outputFileURL completionBlock:^(NSURL *assetURL, NSError *error) {
-		if (error)
-			NSLog(@"%@", error);
-		
-		[[NSFileManager defaultManager] removeItemAtURL:outputFileURL error:nil];
-		
-		if (backgroundRecordingID != UIBackgroundTaskInvalid)
-			[[UIApplication sharedApplication] endBackgroundTask:backgroundRecordingID];
-	}];
-}
+
 
 #pragma mark Device Configuration
 
+
 - (void)focusWithMode:(AVCaptureFocusMode)focusMode exposeWithMode:(AVCaptureExposureMode)exposureMode atDevicePoint:(CGPoint)point monitorSubjectAreaChange:(BOOL)monitorSubjectAreaChange
 {
-	dispatch_async([self sessionQueue], ^{
+	//dispatch_async([self sessionQueue], ^{
 		AVCaptureDevice *device = [[self videoDeviceInput] device];
 		NSError *error = nil;
+        
+
 		if ([device lockForConfiguration:&error])
 		{
-			if ([device isFocusPointOfInterestSupported] && [device isFocusModeSupported:focusMode])
-			{
-				[device setFocusMode:focusMode];
-				[device setFocusPointOfInterest:point];
-			}
-			if ([device isExposurePointOfInterestSupported] && [device isExposureModeSupported:exposureMode])
+            
+            
+            if ([device isExposurePointOfInterestSupported] && [device isExposureModeSupported:exposureMode])
 			{
 				[device setExposureMode:exposureMode];
 				[device setExposurePointOfInterest:point];
+                
 			}
-			[device setSubjectAreaChangeMonitoringEnabled:monitorSubjectAreaChange];
+
+            
+			if ([device isFocusPointOfInterestSupported] && [device isFocusModeSupported:focusMode])
+			{
+
+                [device setFocusPointOfInterest:point];
+                [device setFocusMode:focusMode];
+                //locking focus setting
+                
+                sleep(2);
+                [device setFocusMode:AVCaptureFocusModeLocked];
+                
+			}
+        
+        
+            
 			[device unlockForConfiguration];
+            
+
 		}
 		else
 		{
 			NSLog(@"%@", error);
 		}
-	});
+	//});
 }
 
 + (void)setFlashMode:(AVCaptureFlashMode)flashMode forDevice:(AVCaptureDevice *)device
