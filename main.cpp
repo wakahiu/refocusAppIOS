@@ -243,7 +243,7 @@ int main()
 		if(x_coord==0)
 			return 0;
 	
-		cout<<"coords found:  "<<endl<<x_coord<<endl<<y_coord<<endl;
+		//cout<<"coords found:  "<<endl<<x_coord<<endl<<y_coord<<endl;
 		current=focusMap.at<uchar>(y_coord,x_coord);
 		
 		step=current-previos;
@@ -270,10 +270,7 @@ int main()
 		}
 			
 
-		cout<<endl<<step<<endl;
-
-		
-
+		//cout<<endl<<step<<endl;
 
 		previos=current;
 
