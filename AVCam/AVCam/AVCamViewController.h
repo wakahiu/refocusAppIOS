@@ -45,8 +45,14 @@
  
  */
 
+
 #import <UIKit/UIKit.h>
+#import "ALAssetsLibrary+CustomPhotoAlbum.h"
+
 
 @interface AVCamViewController : UIViewController
+//@property (strong, atomic) ALAssetsLibrary* library;
+
+-(void)addAssetURL:(NSURL*)assetURL toAlbum:(NSString*)albumName withCompletionBlock:(SaveImageCompletion)completionBlock;
 
 @end

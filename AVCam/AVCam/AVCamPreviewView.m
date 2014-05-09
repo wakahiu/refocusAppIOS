@@ -46,7 +46,7 @@
  */
 
 #import "AVCamPreviewView.h"
-#import <AVFoundation/AVFoundation.h>
+
 
 @implementation AVCamPreviewView
 

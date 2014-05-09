@@ -21,8 +21,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JI8-7Z-lWW">
-                                        <rect key="frame" x="207" y="143" width="80" height="50"/>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JI8-7Z-lWW">
+                                        <rect key="frame" x="124" y="519" width="72" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -40,7 +40,10 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="JI8-7Z-lWW" secondAttribute="trailing" constant="124" id="9g7-T3-Lxw"/>
+                                    <constraint firstItem="JI8-7Z-lWW" firstAttribute="leading" secondItem="sVI-mX-69Q" secondAttribute="leading" constant="124" id="C6Z-if-sf0"/>
                                     <constraint firstItem="JI8-7Z-lWW" firstAttribute="centerX" secondItem="sVI-mX-69Q" secondAttribute="centerX" id="UyF-Rc-Hv7"/>
+                                    <constraint firstAttribute="bottom" secondItem="JI8-7Z-lWW" secondAttribute="bottom" constant="20" id="xYF-PU-NT5"/>
                                 </constraints>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="ONs-ko-ZrA" appends="YES" id="c3S-iC-ZUa"/>
