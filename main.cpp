@@ -4,6 +4,28 @@
 int x_coord=-1;
 int y_coord=-1;
 
+//Plots a green dot around point (x,y)
+void plot(Mat img,int x,int y,int b, int g, int r){
+	
+	int k=1;
+	unsigned char * imgPtr = (unsigned char *)img.data;
+	
+	for(int j = y-k; j < y+k; j++){
+		for(int i = x-k; i < x+k; i++ ){
+		
+			//Bounds check
+			if( j < 0 || j >= img.rows || i < 0 || i >= img.cols){
+				continue;
+			}
+	
+			imgPtr[img.step*j+i*3+0] = b;
+			imgPtr[img.step*j+i*3+1] = g;
+			imgPtr[img.step*j+i*3+2] = r;
+		}
+	}
+	
+}
+
 Mat toGray(Mat img){
 
 
@@ -73,14 +95,101 @@ void CallBackFunc(int event, int x, int y, int flags, void* userdata)
 
 }
 
+void alignToPrevImage(Mat imgPrevUnAlligned,Mat imgNextUnAlligned, Mat imgPrev,Mat imgNext){
+		int rows=imgPrevUnAlligned.rows;
+		int cols=imgPrevUnAlligned.cols;
+		int chans=imgPrevUnAlligned.channels();
+		
+		cout << "cols " << cols << " rows " << rows <<  " chans " << chans << endl;
+		
+		unsigned char * imgPrevPtr = (unsigned char *)imgPrevUnAlligned.data;
+		unsigned char * imgNextPtr = (unsigned char *)imgNextUnAlligned.data;
+		
+		Mat imgP(rows, cols,CV_8UC3);
+		Mat imgN(rows, cols,CV_8UC3);
+		
+		int iOff = 0;
+		int jOff = 0;
+		int blockSize = 70;
+		int Wind = 100;
+		float s = 1.3;
+			
+		int jStop = (rows/s + Wind);
+		int iStop = (cols/s + Wind);
+		int jStart = (rows/s - Wind);
+		int iStart = (cols/s - Wind);
+		int jRef = (jStart + jStop)/2;
+		int iRef = (iStart + iStop)/2;
+		
+		//Create the window from which the template is to be matched.
+		Mat windImg;
+		Rect window(iRef-Wind/2,jRef-Wind/2,Wind,Wind);
+		imgNextUnAlligned(window).copyTo(windImg);
+		windImg = imgNextUnAlligned;
+		
+		//namedWindow("window Image",CV_WINDOW_NORMAL);
+		//imshow("window Image",windImg);
+		//cvWaitKey(0);
+		
+		//Create the template
+		Mat templateImage;
+		Rect temp(iRef-blockSize/2,jRef-blockSize/2,blockSize,blockSize);
+		imgPrevUnAlligned(temp).copyTo(templateImage);
+		
+		//namedWindow("window Image",CV_WINDOW_NORMAL);
+		//imshow("window Image",templateImage);
+		//cvWaitKey(0);
+		
+		int r_cols = windImg.cols-templateImage.cols+1;
+		int r_rows = windImg.rows-templateImage.rows+1;
+		Mat result(r_cols,r_rows,CV_32FC1);
+		matchTemplate(windImg,templateImage,result,CV_TM_CCORR_NORMED);
+		
+		double minVal;
+		double maxVal;
+		Point minLoc;
+		Point maxLoc;
+		Point matchLoc;
+		minMaxLoc(result,&minVal,&maxVal,&minLoc,&maxLoc,Mat());
+		
+		matchLoc = maxLoc;
+		//rectangle(windImg,matchLoc,Point(matchLoc.x+templateImage.cols,matchLoc.y+templateImage.rows),Scalar::all(0),2,4,0);
+		//rectangle(result,matchLoc,Point(matchLoc.x+templateImage.cols,matchLoc.y+templateImage.rows),Scalar::all(0),2,4,0);
+		
+		iOff =-( matchLoc.x -iRef+blockSize/2);
+		jOff = -(matchLoc.y - jRef+blockSize/2);
+		cout << iOff << "," << jOff << endl;
+		
+		
+		int newH = imgPrevUnAlligned.rows - abs(jOff);
+		int newW = imgPrevUnAlligned.cols - abs(iOff);
+		
+		Rect prevBounds(iOff > 0? iOff : 0, jOff < 0? 0 : jOff,newW,newH);
+		imgPrevUnAlligned(prevBounds).copyTo(imgPrev);
+		
+		Rect nextBounds(iOff > 0? 0 : -iOff, jOff < 0? -jOff : 0,newW,newH);
+		imgNextUnAlligned(nextBounds).copyTo(imgNext);
+		
+		/*
+		namedWindow("result prev",CV_WINDOW_NORMAL);
+		imshow("result prev",imgPrev);
+		cvWaitKey(0);
+		
+		namedWindow("result next",CV_WINDOW_NORMAL);
+		imshow("result next",imgNext);
+		cvWaitKey(0);
+		*/
+		return;
+
+}
 	
 int main()
 {
 	
-	int N = 25;
-	Mat imageStack[25];
-	Mat grayStack[25];
-	Mat focal_Measure[25];
+	int N = 2;
+	Mat imageStack[N];
+	Mat grayStack[N];
+	Mat focal_Measure[N];
 	
 
 	Mat lap_x;
@@ -97,14 +206,45 @@ int main()
 	//Conversion for arithmetic precision. 
 	for(int i = 0; i < N; i++){
 		char buffer[50];
-		sprintf(buffer,"stack/frame%d.jpg",i+1);
+		sprintf(buffer,"align/img%d.jpg",i+1);
 		imageStack[i] = imread(buffer);
+		
+		if(imageStack[i].cols > 1000 || imageStack[i].rows > 1000){
+		
+			float scale = 1.0/(max(imageStack[i].rows,imageStack[i].cols)/1000+1);
+			Mat resizedImg;
+			
+			resize(imageStack[i],resizedImg,Size(0,0),scale,scale,CV_INTER_AREA);
+			imageStack[i] = resizedImg;
+		}
+		
 		
 		if(!imageStack[i].data){
 			cerr << "Could not open or find the image" << endl;
 			exit(0);
 		}
 		
+		if(i>0){
+			Mat imgPrev;
+			Mat imgNext;
+			//namedWindow("img1",CV_WINDOW_NORMAL);
+			//imshow("img1",imageStack[i-1]);
+			//namedWindow("img2",CV_WINDOW_NORMAL);
+			//imshow("img2",imageStack[i]);
+			//cvWaitKey(0);
+			
+			alignToPrevImage(imageStack[i-1],imageStack[i],imgPrev,imgNext);
+			imageStack[i-1] = imgPrev;
+			imageStack[i] = imgNext;
+		}
+		
+	}
+	
+	return 0;
+	for(int i = 0; i < N; i++){
+		
+		char buffer[50];
+		sprintf(buffer,"align/img%d.jpg",i+1);
 		int rows;
 		int cols;
 
@@ -168,7 +308,7 @@ int main()
 
 	
 	}
-
+	
 	for(int i = 0; false && i < N ; i++){
 		int u = 100;
 		int v = 200;
