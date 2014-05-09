@@ -12,7 +12,7 @@
 @implementation imageStack
 
 @synthesize focalStackUImage;
-//@synthesize focalStackCvMat;
+@synthesize trialStack;
 
 + (id)sharedInstance {
     static imageStack *sharedMyInstance = nil;
@@ -26,6 +26,7 @@
 - (id)init {
     if (self = [super init]) {
         focalStackUImage = [[NSMutableArray alloc] init];
+        trialStack = [[NSMutableArray alloc] init];
         
 //        NSString* filePath = [[NSBundle mainBundle]
 //                              pathForResource:@"lena" ofType:@"jpg"];

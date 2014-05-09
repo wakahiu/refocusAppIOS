@@ -47,12 +47,13 @@
 
 
 #import <UIKit/UIKit.h>
-#import "ALAssetsLibrary+CustomPhotoAlbum.h"
 
+typedef void(^SaveImageCompletion)(NSError* error);
 
 @interface AVCamViewController : UIViewController
-//@property (strong, atomic) ALAssetsLibrary* library;
 
+
+-(void)saveImage:(UIImage*)image toAlbum:(NSString*)albumName withCompletionBlock:(SaveImageCompletion)completionBlock;
 -(void)addAssetURL:(NSURL*)assetURL toAlbum:(NSString*)albumName withCompletionBlock:(SaveImageCompletion)completionBlock;
 
 @end

@@ -11,6 +11,7 @@
 @interface imageStack : NSObject
 
 @property (strong) NSMutableArray *focalStackUImage;
+@property (strong) NSMutableArray *trialStack;
 //@property (strong) NSMutableArray *focalStackCvMat;
 
 +(id) sharedInstance;

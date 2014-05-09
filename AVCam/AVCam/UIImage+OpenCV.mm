@@ -87,7 +87,7 @@ static void ProviderReleaseDataNOP(void *info, const void *data, size_t size)
 {
     
     CGColorSpaceRef colorSpace = CGImageGetColorSpace(self.CGImage);
-
+    //CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
     
     CGFloat cols = self.size.width;
     CGFloat rows = self.size.height;
@@ -111,6 +111,7 @@ static void ProviderReleaseDataNOP(void *info, const void *data, size_t size)
     
     CGContextDrawImage(contextRef, CGRectMake(0, 0, cols, rows), self.CGImage);
     CGContextRelease(contextRef);
+    //CGColorSpaceRelease(colorSpace);
     
     return cvMat;
 }
@@ -120,6 +121,12 @@ static void ProviderReleaseDataNOP(void *info, const void *data, size_t size)
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
     CGFloat cols = self.size.width;
     CGFloat rows = self.size.height;
+    
+    if  (self.imageOrientation == UIImageOrientationLeft
+         || self.imageOrientation == UIImageOrientationRight) {
+        cols = self.size.height;
+        rows = self.size.width;
+    }
     
     cv::Mat cvMat = cv::Mat(rows, cols, CV_8UC1); // 8 bits per component, 1 channel
  
