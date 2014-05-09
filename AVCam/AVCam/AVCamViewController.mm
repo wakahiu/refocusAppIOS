@@ -344,23 +344,7 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
 		[AVCamViewController setFlashMode:AVCaptureFlashModeOff forDevice:[[self videoDeviceInput] device]];
 		
 		// Capture multiple images.
-        //NSMutableArray *imageArray = [[NSMutableArray alloc] init];
-    
-        
-        //ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
 
-//        //search for the album name
-//        __block ALAssetsGroup* groupToAddTo;
-//        [[[ALAssetsLibrary alloc] init] enumerateGroupsWithTypes:ALAssetsGroupAlbum
-//                                usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-//                                    if ([[group valueForProperty:ALAssetsGroupPropertyName] isEqualToString:@"new"]) {
-//                                        NSLog(@"found album!");
-//                                        groupToAddTo = group;
-//                                    }
-//                                }
-//                              failureBlock:^(NSError* error) {
-//                                  NSLog(@"failed to enumerate albums:\nError: %@", [error localizedDescription]);
-//        }];
     
         for (int i=0; i<3; i++)
         {
@@ -372,49 +356,36 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
             
                 [[self stillImageOutput] captureStillImageAsynchronouslyFromConnection:[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo] completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
                     
-                    
                     if (imageDataSampleBuffer)
                     {
                 
-                        NSLog(@"entry count: %d", i);
-                        NSLog(@"entry count: %d\n\n", j);
+                        //NSLog(@"entry count: %d", i);
+                        //NSLog(@"entry count: %d\n\n", j);
                         NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
 
                         UIImage *image = [[UIImage alloc] initWithData:imageData];
-                        
-                        [[[imageStack sharedInstance] focalStack] addObject:image];
-                        
-                        NSLog(@"array contains %d objects", [[[imageStack sharedInstance] focalStack]  count]);
-//                        [[[ALAssetsLibrary alloc] init] writeImageToSavedPhotosAlbum:[image CGImage] orientation:(ALAssetOrientation)[image imageOrientation] completionBlock:nil];
+                        [[[imageStack sharedInstance] focalStackUImage] addObject:image];
                     
-                        
-                        cv::Mat tempMat = [image CVMat];
-                        
-                        UIImage *converted =[[UIImage alloc] initWithCVMat:tempMat];
-                        
-
 /* SC3653 - writes file to a given folder. Commenting temporarily to check for global focal Stack */
  
-                        [[[ALAssetsLibrary alloc] init] writeImageToSavedPhotosAlbum:[image CGImage] orientation:(ALAssetOrientation)[image imageOrientation] completionBlock:^(NSURL *assetURL, NSError *error)
-                        
-                        {
-                            if (error) {
-                                NSLog(@"error");
-                            } else {
-                                NSLog(@"url %@", assetURL);
-                                
-                                //add the asset to the custom photo album
-                                [self addAssetURL: assetURL
-                                          toAlbum:@"new"
-                                    withCompletionBlock:^(NSError *error) {
-                                  if (error!=nil) {
-                                      NSLog(@"Big error: %@", [error description]);
-                                  }
-                              }];
-                                
-                            }  
-                        }];
-
+//                        [[[ALAssetsLibrary alloc] init] writeImageToSavedPhotosAlbum:[image CGImage] orientation:(ALAssetOrientation)[image imageOrientation] completionBlock:^(NSURL *assetURL, NSError *error)
+//                        
+//                        {
+//                            if (error) {
+//                                NSLog(@"error");
+//                            } else {
+//                                NSLog(@"url %@", assetURL);
+//                                
+//                                //add the asset to the custom photo album
+//                                [self addAssetURL: assetURL
+//                                          toAlbum:@"new"
+//                                    withCompletionBlock:^(NSError *error) {
+//                                  if (error!=nil) {
+//                                      NSLog(@"Big error: %@", [error description]);
+//                                  }
+//                              }];
+//                            }  
+//                        }];
 /**********************************************/
                         
                     }
@@ -423,7 +394,22 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
 
             }
         }
-	//});
+
+	dispatch_async([self sessionQueue], ^{
+    sleep(5);
+    NSLog(@"array contains %d objects", [[[imageStack sharedInstance] focalStackUImage]  count]);
+        
+        
+    cv::Mat *focalStackCvMat = new cv::Mat [[[[imageStack sharedInstance] focalStackUImage]  count]];
+        
+    for (NSInteger k=0; k< [[[imageStack sharedInstance] focalStackUImage]  count]; k++)
+    {
+        UIImage *temp= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:k];
+        focalStackCvMat[k].push_back([temp CVMat]);
+        UIImage *converted =[[UIImage alloc] initWithCVMat:focalStackCvMat[k]];
+    }
+    
+	});
     
 }
 
@@ -535,6 +521,7 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
 		[UIView animateWithDuration:.25 animations:^{
 			[[[self previewView] layer] setOpacity:1.0];
 		}];
+        
 	});
 }
 

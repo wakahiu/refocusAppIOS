@@ -15,12 +15,13 @@
 		2F45C1D5177676670052A7F9 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F360BB717692C4700D9A404 /* Main_iPhone.storyboard */; };
 		2F45C1D6177676670052A7F9 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F360BBA17692C4700D9A404 /* Main_iPad.storyboard */; };
 		2FDA781D176DB79700509279 /* AVCamPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDA781C176DB79700509279 /* AVCamPreviewView.m */; };
-		ECEC6AF6191C616000FB3EEB /* imageStack.m in Sources */ = {isa = PBXBuildFile; fileRef = ECEC6AF5191C616000FB3EEB /* imageStack.m */; };
+		ECEC6AF6191C616000FB3EEB /* imageStack.mm in Sources */ = {isa = PBXBuildFile; fileRef = ECEC6AF5191C616000FB3EEB /* imageStack.mm */; };
 		ECEC6AF9191C6DAA00FB3EEB /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEC6AF8191C6DAA00FB3EEB /* opencv2.framework */; };
 		ECEC6AFC191C6E1500FB3EEB /* indexMapGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECEC6AFA191C6E1500FB3EEB /* indexMapGenerator.cpp */; };
 		ECEC6B0A191C8C8E00FB3EEB /* UIImage+OpenCV.mm in Sources */ = {isa = PBXBuildFile; fileRef = ECEC6B09191C8C8E00FB3EEB /* UIImage+OpenCV.mm */; };
 		ECEC6B0C191C8EBB00FB3EEB /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEC6B0B191C8EBB00FB3EEB /* libc++.dylib */; };
 		ECEC6B0E191C934800FB3EEB /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEC6B0D191C934800FB3EEB /* AssetsLibrary.framework */; };
+		ECEC6B13191CC0CF00FB3EEB /* lena.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ECEC6B12191CC0CF00FB3EEB /* lena.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,7 +40,7 @@
 		2FDA781B176DB79700509279 /* AVCamPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVCamPreviewView.h; sourceTree = "<group>"; };
 		2FDA781C176DB79700509279 /* AVCamPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVCamPreviewView.m; sourceTree = "<group>"; };
 		ECEC6AF4191C616000FB3EEB /* imageStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imageStack.h; sourceTree = "<group>"; };
-		ECEC6AF5191C616000FB3EEB /* imageStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = imageStack.m; sourceTree = "<group>"; };
+		ECEC6AF5191C616000FB3EEB /* imageStack.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = imageStack.mm; sourceTree = "<group>"; };
 		ECEC6AF8191C6DAA00FB3EEB /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ../../../opencv2.framework; sourceTree = "<group>"; };
 		ECEC6AFA191C6E1500FB3EEB /* indexMapGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = indexMapGenerator.cpp; sourceTree = "<group>"; };
 		ECEC6AFB191C6E1500FB3EEB /* indexMapGenerator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = indexMapGenerator.hpp; sourceTree = "<group>"; };
@@ -48,6 +49,7 @@
 		ECEC6B09191C8C8E00FB3EEB /* UIImage+OpenCV.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "UIImage+OpenCV.mm"; sourceTree = "<group>"; };
 		ECEC6B0B191C8EBB00FB3EEB /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		ECEC6B0D191C934800FB3EEB /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		ECEC6B12191CC0CF00FB3EEB /* lena.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = lena.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,7 +91,7 @@
 			children = (
 				2F360BB417692C4700D9A404 /* AVCamAppDelegate.h */,
 				ECEC6AF4191C616000FB3EEB /* imageStack.h */,
-				ECEC6AF5191C616000FB3EEB /* imageStack.m */,
+				ECEC6AF5191C616000FB3EEB /* imageStack.mm */,
 				2F360BB517692C4700D9A404 /* AVCamAppDelegate.m */,
 				2F360BBD17692C4700D9A404 /* AVCamViewController.h */,
 				2F360BBE17692C4700D9A404 /* AVCamViewController.mm */,
@@ -110,6 +112,7 @@
 		2F360BAC17692C4700D9A404 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				ECEC6B12191CC0CF00FB3EEB /* lena.jpg */,
 				ECEC6B00191C74A800FB3EEB /* AVCam-Prefix.pch */,
 				2F360BAD17692C4700D9A404 /* AVCam-Info.plist */,
 				2F360BAE17692C4700D9A404 /* InfoPlist.strings */,
@@ -181,6 +184,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F360BC117692C4700D9A404 /* Images.xcassets in Resources */,
+				ECEC6B13191CC0CF00FB3EEB /* lena.jpg in Resources */,
 				2F360BB017692C4700D9A404 /* InfoPlist.strings in Resources */,
 				2F45C1D5177676670052A7F9 /* Main_iPhone.storyboard in Resources */,
 				2F45C1D6177676670052A7F9 /* Main_iPad.storyboard in Resources */,
@@ -195,7 +199,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F360BB217692C4700D9A404 /* main.m in Sources */,
-				ECEC6AF6191C616000FB3EEB /* imageStack.m in Sources */,
+				ECEC6AF6191C616000FB3EEB /* imageStack.mm in Sources */,
 				2F360BBF17692C4700D9A404 /* AVCamViewController.mm in Sources */,
 				ECEC6AFC191C6E1500FB3EEB /* indexMapGenerator.cpp in Sources */,
 				ECEC6B0A191C8C8E00FB3EEB /* UIImage+OpenCV.mm in Sources */,

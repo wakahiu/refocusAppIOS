@@ -10,7 +10,8 @@
 
 @interface imageStack : NSObject
 
-@property (nonatomic,retain) NSMutableArray *focalStack;
+@property (strong) NSMutableArray *focalStackUImage;
+//@property (strong) NSMutableArray *focalStackCvMat;
 
 +(id) sharedInstance;
 
