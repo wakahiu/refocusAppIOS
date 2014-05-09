@@ -167,7 +167,7 @@ void alignToPrevImage(Mat imgPrevUnAlligned,Mat imgNextUnAlligned, Mat imgPrev,M
 		Rect prevBounds(iOff > 0? iOff : 0, jOff < 0? 0 : jOff,newW,newH);
 		imgPrevUnAlligned(prevBounds).copyTo(imgPrev);
 		
-		Rect nextBounds(iOff > 0? iOff : 0, jOff < 0? -jOff : 0,newW,newH);
+		Rect nextBounds(iOff > 0? 0 : -iOff, jOff < 0? -jOff : 0,newW,newH);
 		imgNextUnAlligned(nextBounds).copyTo(imgNext);
 		
 		namedWindow("result prev",CV_WINDOW_NORMAL);
