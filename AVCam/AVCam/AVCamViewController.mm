@@ -62,6 +62,13 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
 
 // For use in the storyboards.
 @property (nonatomic, weak) IBOutlet AVCamPreviewView *previewView;
+
+@property (weak, nonatomic) IBOutlet UIButton *secretButton;
+
+- (IBAction)secretAction:(id)sender;
+
+
+
 @property (nonatomic, weak) IBOutlet UIButton *stillButton;
 
 - (IBAction)snapStillImage:(id)sender;
@@ -102,8 +109,9 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
 {
 	[super viewDidLoad];
 	
-    //creates an album
     
+    //creates an album
+    _secretButton.hidden= YES;
     
     [[[ALAssetsLibrary alloc] init] addAssetsGroupAlbumWithName:@"new"
      
@@ -339,8 +347,8 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
     
     
     _stillButton.enabled= NO;
-    viewDidDisappear:(YES);
-    [self performSegueWithIdentifier: @"camToPreview" sender: self];
+
+    [[self session] stopRunning];
     
 //	dispatch_async([self sessionQueue], ^{
 		// Update the orientation on the still image output video connection before capturing.
@@ -522,7 +530,11 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
         focalIndex= indexMapGenerator::generateFocalIndexMap(focalStackCvMatTrial);
         UIImage *converted =[[UIImage alloc] initWithCVMat:focalIndex];
         
+        [[[imageStack sharedInstance] trialStack] addObject:converted];
+        
         NSLog(@"fingers crossed! %lu", focalStackCvMat.size());
+        
+        [_secretButton sendActionsForControlEvents: UIControlEventTouchUpInside];
         
     /* Actual stuff - Sid ------------ */
 //    for (NSInteger k=0; k< [[[imageStack sharedInstance] focalStackUImage]  count]; k++)
@@ -679,4 +691,15 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
 	}];
 }
 
+- (IBAction)secretAction:(id)sender {
+    
+    //viewDidDisappear:(YES);
+    //[self dismissViewControllerAnimated:YES completion:nil];
+    
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVCaptureDeviceSubjectAreaDidChangeNotification object:[[self videoDeviceInput] device]];
+//    [[NSNotificationCenter defaultCenter] removeObserver:[self runtimeErrorHandlingObserver]];
+    
+    [self performSegueWithIdentifier: @"camToPreview" sender: self];
+    
+}
 @end

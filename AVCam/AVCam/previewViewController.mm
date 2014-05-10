@@ -7,8 +7,11 @@
 //
 
 #import "previewViewController.h"
+#import "imageStack.h"
 
 @interface previewViewController ()
+- (IBAction)findIndex:(UITapGestureRecognizer *)recognize;
+
 
 @end
 
@@ -28,13 +31,26 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    NSString* filePath = [[NSBundle mainBundle]
-                          pathForResource:@"lena" ofType:@"jpg"];
+    //NSString* filePath = [[NSBundle mainBundle]
+      //                    pathForResource:@"lena" ofType:@"jpg"];
     
-    UIImage* lena_image = [UIImage imageWithContentsOfFile:filePath];
-    _displayImage.image = lena_image;
+
+    //[recognize setDelegate:self];
     
+    
+    
+    UIImage* focalIndex = [[[imageStack sharedInstance] trialStack] objectAtIndex:25];
+    
+    _displayImage.image = focalIndex;
+    
+    CGImageRef image = [focalIndex CGImage];
+    
+//    CFDataRef data = CGDataProviderCopyData(CGImageGetDataProvider(image));
+//    const unsigned char * buffer =  CFDataGetBytePtr(data);
+    NSLog(@"try");
+
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -53,4 +69,18 @@
 }
 */
 
+
+- (IBAction)findIndex:(UITapGestureRecognizer *)recognize {
+    NSLog(@"reached");
+    
+    
+    
+    CGPoint point = [recognize locationInView:self.view];
+    //CGPoint topLeft = [self.layer captureDevicePointOfInterestForPoint:point];
+
+    //CGPoint devicePoint = [(AVCaptureVideoPreviewLayer *)[[self previewView] layer] captureDevicePointOfInterestForPoint:[gestureRecognizer locationInView:[gestureRecognizer view]]];
+    
+    
+    NSLog(@"x = %f y = %f", point.x, point.y );
+}
 @end

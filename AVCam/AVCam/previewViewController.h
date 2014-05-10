@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface previewViewController : UIViewController
+
+
 @property (strong, nonatomic) IBOutlet UIImageView *displayImage;
 
 @end

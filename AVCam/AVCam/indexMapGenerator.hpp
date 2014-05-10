@@ -25,6 +25,7 @@ public:
     static Mat toGray(Mat img);
     static Mat generateFocalIndexMap(vector<Mat> imageStack);
     static Mat lap_dir(Mat img, int direction);
+//    static int find
 
 
 };

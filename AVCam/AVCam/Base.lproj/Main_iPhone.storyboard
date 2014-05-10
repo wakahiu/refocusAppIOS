@@ -34,7 +34,17 @@
                                         </state>
                                         <connections>
                                             <action selector="snapStillImage:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="mhO-gK-EhH"/>
-                                            <segue destination="AHb-OY-Kzc" kind="modal" identifier="camToPreview" id="Fuo-FP-ETL"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cpl-bA-K5M">
+                                        <rect key="frame" x="34" y="518" width="43" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="secret">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="secretAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="fOZ-zT-pNE"/>
+                                            <segue destination="AHb-OY-Kzc" kind="modal" identifier="camToPreview" modalTransitionStyle="crossDissolve" id="pFI-iT-K16"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -63,6 +73,7 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
                         <outlet property="previewView" destination="sVI-mX-69Q" id="UGh-um-teZ"/>
+                        <outlet property="secretButton" destination="cpl-bA-K5M" id="Cq8-CS-tJU"/>
                         <outlet property="stillButton" destination="JI8-7Z-lWW" id="oT3-f6-Uvt"/>
                     </connections>
                 </viewController>
@@ -78,17 +89,37 @@
         <scene sceneID="ZBj-1Z-BJa">
             <objects>
                 <viewController id="AHb-OY-Kzc" customClass="previewViewController" sceneMemberID="viewController">
-                    <imageView key="view" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Oh8-lP-tXj">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aR7-9G-Jb8"/>
+                        <viewControllerLayoutGuide type="bottom" id="SWq-ir-xgy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="e6w-E5-ecE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    </imageView>
+                        <subviews>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dgm-y3-zbA">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="maI-5e-v1M" appends="YES" id="SIk-Hz-SA6"/>
+                                </connections>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
                     <connections>
-                        <outlet property="displayImage" destination="Oh8-lP-tXj" id="VyA-yv-fSg"/>
+                        <outlet property="displayImage" destination="Dgm-y3-zbA" id="Ii3-BX-V0j"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4nE-np-0VP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="maI-5e-v1M">
+                    <connections>
+                        <action selector="findIndex:" destination="AHb-OY-Kzc" id="mo6-fh-sr3"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="571" y="-16"/>
+            <point key="canvasLocation" x="567" y="80"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
