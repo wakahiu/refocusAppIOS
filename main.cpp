@@ -95,7 +95,7 @@ void CallBackFunc(int event, int x, int y, int flags, void* userdata)
 
 }
 
-void alignToPrevImage(Mat imgPrevUnAlligned,Mat imgNextUnAlligned, Mat imgPrev,Mat imgNext){
+void alignToPrevImage(Mat imgPrevUnAlligned,Mat imgNextUnAlligned, Mat &imgPrev,Mat &imgNext){
 		int rows=imgPrevUnAlligned.rows;
 		int cols=imgPrevUnAlligned.cols;
 		int chans=imgPrevUnAlligned.channels();
@@ -104,9 +104,6 @@ void alignToPrevImage(Mat imgPrevUnAlligned,Mat imgNextUnAlligned, Mat imgPrev,M
 		
 		unsigned char * imgPrevPtr = (unsigned char *)imgPrevUnAlligned.data;
 		unsigned char * imgNextPtr = (unsigned char *)imgNextUnAlligned.data;
-		
-		Mat imgP(rows, cols,CV_8UC3);
-		Mat imgN(rows, cols,CV_8UC3);
 		
 		int iOff = 0;
 		int jOff = 0;
@@ -178,8 +175,10 @@ void alignToPrevImage(Mat imgPrevUnAlligned,Mat imgNextUnAlligned, Mat imgPrev,M
 		namedWindow("result next",CV_WINDOW_NORMAL);
 		imshow("result next",imgNext);
 		cvWaitKey(0);
-		*/
+		
+		
 		return;
+		*/
 
 }
 	
@@ -227,20 +226,22 @@ int main()
 		if(i>0){
 			Mat imgPrev;
 			Mat imgNext;
-			//namedWindow("img1",CV_WINDOW_NORMAL);
-			//imshow("img1",imageStack[i-1]);
-			//namedWindow("img2",CV_WINDOW_NORMAL);
-			//imshow("img2",imageStack[i]);
-			//cvWaitKey(0);
 			
 			alignToPrevImage(imageStack[i-1],imageStack[i],imgPrev,imgNext);
 			imageStack[i-1] = imgPrev;
 			imageStack[i] = imgNext;
+			
+			/*
+			namedWindow("img1",CV_WINDOW_NORMAL);
+			imshow("img1",imgPrev);
+			namedWindow("img2",CV_WINDOW_NORMAL);
+			imshow("img2",imgNext);
+			cvWaitKey(0);
+			*/
 		}
 		
 	}
 	
-	return 0;
 	for(int i = 0; i < N; i++){
 		
 		char buffer[50];
@@ -253,8 +254,16 @@ int main()
 		
 		//Create a new Gray scale image
 
-		Mat grayImg = toGray(imageStack[i] );
-		grayStack[i] = grayImg;
+		Mat grayImg;// = toGray(imageStack[i] );
+		Mat grayImgFloat;
+		cvtColor(imageStack[i],grayImg,CV_BGR2GRAY,1);
+		grayImg.convertTo(grayImgFloat,CV_32FC1,1/255.0);
+		grayStack[i] = grayImgFloat;
+		
+		namedWindow(buffer,WINDOW_AUTOSIZE);
+		imshow(buffer,grayImgFloat);
+		waitKey(0);
+
 		
 
 		//sid
