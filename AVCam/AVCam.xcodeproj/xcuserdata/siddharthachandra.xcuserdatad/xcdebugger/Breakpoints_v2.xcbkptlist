@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AVCam/AVCamViewController.mm"
-            timestampString = "421329226.359658"
+            timestampString = "421433153.671714"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "647"
-            endingLineNumber = "647"
+            startingLineNumber = "655"
+            endingLineNumber = "655"
             landmarkName = "-runStillImageCaptureAnimation"
             landmarkType = "5">
             <Locations>
@@ -56,11 +56,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AVCam/AVCamViewController.mm"
-            timestampString = "421329226.359658"
+            timestampString = "421433153.671714"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "536"
-            endingLineNumber = "536"
+            startingLineNumber = "544"
+            endingLineNumber = "544"
             landmarkName = "@implementation AVCamViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -72,43 +72,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AVCam/AVCamViewController.mm"
-            timestampString = "421312658.216626"
+            timestampString = "421433153.671714"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "355"
-            endingLineNumber = "355"
-            landmarkName = "-snapStillImage:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AVCam/AVCamViewController.mm"
-            timestampString = "421312658.216626"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "358"
-            endingLineNumber = "358"
-            landmarkName = "-snapStillImage:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AVCam/AVCamViewController.mm"
-            timestampString = "421329226.359658"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "579"
-            endingLineNumber = "579"
+            startingLineNumber = "587"
+            endingLineNumber = "587"
             landmarkName = "-focusWithMode:exposeWithMode:atDevicePoint:monitorSubjectAreaChange:"
             landmarkType = "5">
          </BreakpointContent>
@@ -120,27 +88,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AVCam/AVCamViewController.mm"
-            timestampString = "421312658.216626"
+            timestampString = "421433153.671714"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "367"
-            endingLineNumber = "367"
-            landmarkName = "-snapStillImage:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AVCam/AVCamViewController.mm"
-            timestampString = "421329226.359658"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "525"
-            endingLineNumber = "525"
+            startingLineNumber = "533"
+            endingLineNumber = "533"
             landmarkName = "-snapStillImage:"
             landmarkType = "5">
          </BreakpointContent>
@@ -152,11 +104,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AVCam/AVCamViewController.mm"
-            timestampString = "421329226.359658"
+            timestampString = "421433153.671714"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "532"
-            endingLineNumber = "532"
+            startingLineNumber = "540"
+            endingLineNumber = "540"
             landmarkName = "-snapStillImage:"
             landmarkType = "5">
             <Locations>
@@ -164,29 +116,29 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__38-[AVCamViewController snapStillImage:]_block_invoke_2"
+                  symbolName = "__38-[AVCamViewController snapStillImage:]_block_invoke"
                   moduleName = "AVCam"
                   urlString = "file:///Users/siddharthachandra/gits/refocusAppIOS/AVCam/AVCam/AVCamViewController.mm"
-                  timestampString = "421334114.190434"
+                  timestampString = "421433807.663129"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "533"
-                  endingLineNumber = "533"
-                  offsetFromSymbolStart = "12418">
+                  startingLineNumber = "541"
+                  endingLineNumber = "541"
+                  offsetFromSymbolStart = "11278">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__38-[AVCamViewController snapStillImage:]_block_invoke_2"
+                  symbolName = "__38-[AVCamViewController snapStillImage:]_block_invoke"
                   moduleName = "AVCam"
                   urlString = "file:///Users/siddharthachandra/gits/refocusAppIOS/AVCam/AVCam/AVCamViewController.mm"
-                  timestampString = "421334114.190791"
+                  timestampString = "421433807.663495"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "533"
-                  endingLineNumber = "533"
-                  offsetFromSymbolStart = "12430">
+                  startingLineNumber = "541"
+                  endingLineNumber = "541"
+                  offsetFromSymbolStart = "11290">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -198,11 +150,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AVCam/AVCamViewController.mm"
-            timestampString = "421325570.666495"
+            timestampString = "421433153.671714"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "498"
-            endingLineNumber = "498"
+            startingLineNumber = "506"
+            endingLineNumber = "506"
             landmarkName = "-snapStillImage:"
             landmarkType = "5">
          </BreakpointContent>
@@ -214,11 +166,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AVCam/AVCamViewController.mm"
-            timestampString = "421329226.359658"
+            timestampString = "421433153.671714"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "517"
-            endingLineNumber = "517"
+            startingLineNumber = "525"
+            endingLineNumber = "525"
             landmarkName = "-snapStillImage:"
             landmarkType = "5">
          </BreakpointContent>
@@ -262,11 +214,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AVCam/AVCamViewController.mm"
-            timestampString = "421329226.359658"
+            timestampString = "421433153.671714"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "514"
-            endingLineNumber = "514"
+            startingLineNumber = "522"
+            endingLineNumber = "522"
             landmarkName = "-snapStillImage:"
             landmarkType = "5">
          </BreakpointContent>
@@ -278,12 +230,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AVCam/AVCamViewController.mm"
-            timestampString = "421329430.195682"
+            timestampString = "421433153.671714"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "500"
-            endingLineNumber = "500"
+            startingLineNumber = "508"
+            endingLineNumber = "508"
             landmarkName = "-snapStillImage:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AVCam/AVCamViewController.mm"
+            timestampString = "421433102.958279"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "341"
+            endingLineNumber = "341"
+            landmarkName = "-snapStillImage:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AVCam/previewViewController.mm"
+            timestampString = "421433794.08288"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "-didReceiveMemoryWarning"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

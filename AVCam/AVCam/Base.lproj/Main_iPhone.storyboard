@@ -34,6 +34,7 @@
                                         </state>
                                         <connections>
                                             <action selector="snapStillImage:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="mhO-gK-EhH"/>
+                                            <segue destination="AHb-OY-Kzc" kind="modal" identifier="camToPreview" id="Fuo-FP-ETL"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -72,6 +73,22 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
+        </scene>
+        <!--Preview View Controller-->
+        <scene sceneID="ZBj-1Z-BJa">
+            <objects>
+                <viewController id="AHb-OY-Kzc" customClass="previewViewController" sceneMemberID="viewController">
+                    <imageView key="view" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Oh8-lP-tXj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </imageView>
+                    <connections>
+                        <outlet property="displayImage" destination="Oh8-lP-tXj" id="VyA-yv-fSg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4nE-np-0VP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="571" y="-16"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

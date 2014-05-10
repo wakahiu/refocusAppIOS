@@ -47,6 +47,7 @@
 		ECEC6B44191CDEC300FB3EEB /* frame7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ECEC6B2B191CDEC300FB3EEB /* frame7.jpg */; };
 		ECEC6B45191CDEC300FB3EEB /* frame8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ECEC6B2C191CDEC300FB3EEB /* frame8.jpg */; };
 		ECEC6B46191CDEC300FB3EEB /* frame9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ECEC6B2D191CDEC300FB3EEB /* frame9.jpg */; };
+		ECEC6B4F191E8C5D00FB3EEB /* previewViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = ECEC6B4E191E8C5D00FB3EEB /* previewViewController.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -100,6 +101,8 @@
 		ECEC6B2B191CDEC300FB3EEB /* frame7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = frame7.jpg; path = stack/frame7.jpg; sourceTree = "<group>"; };
 		ECEC6B2C191CDEC300FB3EEB /* frame8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = frame8.jpg; path = stack/frame8.jpg; sourceTree = "<group>"; };
 		ECEC6B2D191CDEC300FB3EEB /* frame9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = frame9.jpg; path = stack/frame9.jpg; sourceTree = "<group>"; };
+		ECEC6B4D191E8C5D00FB3EEB /* previewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = previewViewController.h; sourceTree = "<group>"; };
+		ECEC6B4E191E8C5D00FB3EEB /* previewViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = previewViewController.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +148,8 @@
 				2F360BB517692C4700D9A404 /* AVCamAppDelegate.m */,
 				2F360BBD17692C4700D9A404 /* AVCamViewController.h */,
 				2F360BBE17692C4700D9A404 /* AVCamViewController.mm */,
+				ECEC6B4D191E8C5D00FB3EEB /* previewViewController.h */,
+				ECEC6B4E191E8C5D00FB3EEB /* previewViewController.mm */,
 				ECEC6B08191C8C8E00FB3EEB /* UIImage+OpenCV.h */,
 				ECEC6B09191C8C8E00FB3EEB /* UIImage+OpenCV.mm */,
 				ECEC6AFA191C6E1500FB3EEB /* indexMapGenerator.cpp */,
@@ -301,6 +306,7 @@
 				2F360BB217692C4700D9A404 /* main.m in Sources */,
 				ECEC6AF6191C616000FB3EEB /* imageStack.mm in Sources */,
 				2F360BBF17692C4700D9A404 /* AVCamViewController.mm in Sources */,
+				ECEC6B4F191E8C5D00FB3EEB /* previewViewController.mm in Sources */,
 				ECEC6AFC191C6E1500FB3EEB /* indexMapGenerator.cpp in Sources */,
 				ECEC6B0A191C8C8E00FB3EEB /* UIImage+OpenCV.mm in Sources */,
 				2FDA781D176DB79700509279 /* AVCamPreviewView.m in Sources */,

@@ -336,6 +336,12 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
 
 - (IBAction)snapStillImage:(id)sender
 {
+    
+    
+    _stillButton.enabled= NO;
+    viewDidDisappear:(YES);
+    [self performSegueWithIdentifier: @"camToPreview" sender: self];
+    
 //	dispatch_async([self sessionQueue], ^{
 		// Update the orientation on the still image output video connection before capturing.
 		[[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo] setVideoOrientation:[[(AVCaptureVideoPreviewLayer *)[[self previewView] layer] connection] videoOrientation]];
@@ -345,59 +351,61 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
 		
 		// Capture multiple images.
 
+    //Sid - Commented for testing: Actual!
     
-        for (int i=0; i<3; i++)
-        {
-            for (int j=0; j<3; j++)
-            {
-                CGPoint devicePoint = CGPointMake(i*.33 +0.16, j*0.33+0.16);
-        
-                [self focusWithMode:AVCaptureFocusModeAutoFocus exposeWithMode:AVCaptureExposureModeAutoExpose atDevicePoint:devicePoint monitorSubjectAreaChange:YES];
-            
-                [[self stillImageOutput] captureStillImageAsynchronouslyFromConnection:[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo] completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
-                    
-                    if (imageDataSampleBuffer)
-                    {
-                
-                        //NSLog(@"entry count: %d", i);
-                        //NSLog(@"entry count: %d\n\n", j);
-                        NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
-
-                        UIImage *image = [[UIImage alloc] initWithData:imageData];
-                        [[[imageStack sharedInstance] focalStackUImage] addObject:image];
-                    
-/* SC3653 - writes file to a given folder. Commenting temporarily to check for global focal Stack */
- 
-//                        [[[ALAssetsLibrary alloc] init] writeImageToSavedPhotosAlbum:[image CGImage] orientation:(ALAssetOrientation)[image imageOrientation] completionBlock:^(NSURL *assetURL, NSError *error)
+//        for (int i=0; i<3; i++)
+//        {
+//            for (int j=0; j<3; j++)
+//            {
+//                CGPoint devicePoint = CGPointMake(i*.33 +0.16, j*0.33+0.16);
+//        
+//                [self focusWithMode:AVCaptureFocusModeAutoFocus exposeWithMode:AVCaptureExposureModeAutoExpose atDevicePoint:devicePoint monitorSubjectAreaChange:YES];
+//            
+//                [[self stillImageOutput] captureStillImageAsynchronouslyFromConnection:[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo] completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
+//                    
+//                    if (imageDataSampleBuffer)
+//                    {
+//                
+//                        //NSLog(@"entry count: %d", i);
+//                        //NSLog(@"entry count: %d\n\n", j);
+//                        NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
+//
+//                        UIImage *image = [[UIImage alloc] initWithData:imageData];
+//                        [[[imageStack sharedInstance] focalStackUImage] addObject:image];
+//                    
+///* SC3653 - writes file to a given folder. Commenting temporarily to check for global focal Stack */
+// 
+////                        [[[ALAssetsLibrary alloc] init] writeImageToSavedPhotosAlbum:[image CGImage] orientation:(ALAssetOrientation)[image imageOrientation] completionBlock:^(NSURL *assetURL, NSError *error)
+////                        
+////                        {
+////                            if (error) {
+////                                NSLog(@"error");
+////                            } else {
+////                                NSLog(@"url %@", assetURL);
+////                                
+////                                //add the asset to the custom photo album
+////                                [self addAssetURL: assetURL
+////                                          toAlbum:@"new"
+////                                    withCompletionBlock:^(NSError *error) {
+////                                  if (error!=nil) {
+////                                      NSLog(@"Big error: %@", [error description]);
+////                                  }
+////                              }];
+////                            }  
+////                        }];
+///**********************************************/
 //                        
-//                        {
-//                            if (error) {
-//                                NSLog(@"error");
-//                            } else {
-//                                NSLog(@"url %@", assetURL);
-//                                
-//                                //add the asset to the custom photo album
-//                                [self addAssetURL: assetURL
-//                                          toAlbum:@"new"
-//                                    withCompletionBlock:^(NSError *error) {
-//                                  if (error!=nil) {
-//                                      NSLog(@"Big error: %@", [error description]);
-//                                  }
-//                              }];
-//                            }  
-//                        }];
-/**********************************************/
-                        
-                    }
-                }];
-
-
-            }
-        }
+//                    }
+//                }];
+//
+//
+//            }
+//        }
 
 	dispatch_async([self sessionQueue], ^{
-    sleep(5);
-    NSLog(@"array contains %d objects", [[[imageStack sharedInstance] focalStackUImage]  count]);
+    // Sid - commented for testing: Actual
+    //sleep(5);
+    //NSLog(@"array contains %d objects", [[[imageStack sharedInstance] focalStackUImage]  count]);
         
         
     //cv::Mat *focalStackCvMat = new cv::Mat [[[[imageStack sharedInstance] focalStackUImage]  count]];
@@ -516,13 +524,13 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
         
         NSLog(@"fingers crossed! %lu", focalStackCvMat.size());
         
-        
-    for (NSInteger k=0; k< [[[imageStack sharedInstance] focalStackUImage]  count]; k++)
-    {
-        UIImage *temp= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:k];
-        focalStackCvMat.push_back([temp CVMat]);
-        //UIImage *converted =[[UIImage alloc] initWithCVMat:focalStackCvMat[k]];
-    }
+    /* Actual stuff - Sid ------------ */
+//    for (NSInteger k=0; k< [[[imageStack sharedInstance] focalStackUImage]  count]; k++)
+//    {
+//        UIImage *temp= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:k];
+//        focalStackCvMat.push_back([temp CVMat]);
+//        //UIImage *converted =[[UIImage alloc] initWithCVMat:focalStackCvMat[k]];
+//    }
         //Generate focalIndexStack
         //Mat focalIndex;
         
