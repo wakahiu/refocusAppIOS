@@ -153,7 +153,7 @@ Mat indexMapGenerator::generateFocalIndexMap(vector<Mat> imageStack)
 	 				maxVal=tempVal;
 	 			}
 	  		}
-	  		focusMap.at<uchar>(y,x)=maxK*10;		//TODO take out this scale factor. For visialization and debug
+	  		focusMap.at<uchar>(y,x)=maxK;		//TODO take out this scale factor. For visialization and debug
 	  	}
         
  	}

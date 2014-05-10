@@ -48,6 +48,7 @@
 #import <UIKit/UIKit.h>
 
 #import "AVCamAppDelegate.h"
+int previous = 0;
 
 int main(int argc, char * argv[])
 {

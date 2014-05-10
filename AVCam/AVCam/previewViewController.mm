@@ -37,15 +37,14 @@
 
     //[recognize setDelegate:self];
     
+    int previous=0;
+    UIImage* displayed = [[[imageStack sharedInstance] trialStack] objectAtIndex:0];
+    _displayImage.image = displayed;
     
     
-    UIImage* focalIndex = [[[imageStack sharedInstance] trialStack] objectAtIndex:25];
     
-    _displayImage.image = focalIndex;
     
-    CGImageRef image = [focalIndex CGImage];
     
-//    CFDataRef data = CGDataProviderCopyData(CGImageGetDataProvider(image));
 //    const unsigned char * buffer =  CFDataGetBytePtr(data);
     NSLog(@"try");
 
@@ -73,14 +72,73 @@
 - (IBAction)findIndex:(UITapGestureRecognizer *)recognize {
     NSLog(@"reached");
     
-    
+
     
     CGPoint point = [recognize locationInView:self.view];
+    
+    NSLog(@"pointx %f and point y%f", point.x,point.y);
     //CGPoint topLeft = [self.layer captureDevicePointOfInterestForPoint:point];
 
     //CGPoint devicePoint = [(AVCaptureVideoPreviewLayer *)[[self previewView] layer] captureDevicePointOfInterestForPoint:[gestureRecognizer locationInView:[gestureRecognizer view]]];
     
     
-    NSLog(@"x = %f y = %f", point.x, point.y );
+    CGImageRef image = [[[[imageStack sharedInstance] trialStack] objectAtIndex:25] CGImage];
+    CFDataRef data = CGDataProviderCopyData(CGImageGetDataProvider(image));
+    UInt8 * buf = (UInt8 *) CFDataGetBytePtr(data);
+    int length = CFDataGetLength(data);
+    
+    size_t w = CGImageGetWidth(image);
+    size_t row = CGImageGetBytesPerRow(image);
+    //size_t h = CGImageGetHeight(image);
+    
+    int x=lroundf(point.x);
+    int y=lroundf(point.y);
+    
+    int index = buf[lround(buf[x]*row + y)];
+//    for(int i=0; i<length; i+=4)
+//    {
+//        int r = buf[i];
+//        int g = buf[i+1];
+//        int b = buf[i+2];
+//        NSLog(@"red %d", r);
+//        NSLog(@"green %d", g);
+//        NSLog(@"blue %d", b);
+//    }
+    CFRelease(data);
+
+    
+//    Begin transition effect
+    int step;
+    int current = 0;
+    extern int previous;
+    current= index;
+    step=current-previous;
+    
+    
+    if(step<1)
+    {
+        for(int i=previous; i>=current;i--)
+        {
+            sleep(0.5);
+            _displayImage.image = [[[imageStack sharedInstance] trialStack] objectAtIndex:i];
+            sleep(0.5);
+        }
+        
+    }
+    
+    else
+    {
+        for(int i=previous; i<=current; i++)
+        {   sleep(0.5);
+            _displayImage.image = [[[imageStack sharedInstance] trialStack] objectAtIndex:i];
+            sleep(0.5);
+        }
+        
+    
+    
+    }
+    previous=current;
+    //_displayImage.image = [[[imageStack sharedInstance] trialStack] objectAtIndex:index];
+    //NSLog(@"index %d",index );
 }
 @end
