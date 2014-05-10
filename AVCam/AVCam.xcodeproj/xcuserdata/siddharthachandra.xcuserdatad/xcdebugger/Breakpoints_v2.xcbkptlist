@@ -182,11 +182,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AVCam/indexMapGenerator.cpp"
-            timestampString = "421333846.665009"
+            timestampString = "421450267.350867"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
             landmarkName = "indexMapGenerator::generateFocalIndexMap(vector&lt;Mat&gt; imageStack)"
             landmarkType = "5">
          </BreakpointContent>
@@ -198,11 +198,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AVCam/indexMapGenerator.cpp"
-            timestampString = "421328394.803573"
+            timestampString = "421450267.350867"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
             landmarkName = "indexMapGenerator::generateFocalIndexMap(vector&lt;Mat&gt; imageStack)"
             landmarkType = "5">
          </BreakpointContent>
@@ -262,11 +262,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AVCam/previewViewController.mm"
-            timestampString = "421449468.857348"
+            timestampString = "421450267.350867"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
             landmarkName = "-findIndex:"
             landmarkType = "5">
          </BreakpointContent>
@@ -278,7 +278,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AVCam/previewViewController.mm"
-            timestampString = "421449468.857348"
+            timestampString = "421450267.350867"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "50"

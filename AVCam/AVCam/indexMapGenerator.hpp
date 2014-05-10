@@ -22,8 +22,11 @@ public:
     
     
     //Sid
-    static Mat toGray(Mat img);
+    
+    static Mat alignImages(vector<Mat> imageStack);
     static Mat generateFocalIndexMap(vector<Mat> imageStack);
+    static Mat toGray(Mat img);
+
     static Mat lap_dir(Mat img, int direction);
 //    static int find
 

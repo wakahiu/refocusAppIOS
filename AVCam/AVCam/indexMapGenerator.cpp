@@ -37,6 +37,11 @@ Mat indexMapGenerator::toGray(Mat img){
 	return grayImg;
 }
 
+Mat indexMapGenerator::alignImages(vector<Mat> imageStack)
+{
+    return imageStack[0];
+}
+
 Mat indexMapGenerator::lap_dir(Mat img, int direction)
 {
 	//int cols = img.cols;
@@ -85,8 +90,12 @@ Mat indexMapGenerator::generateFocalIndexMap(vector<Mat> imageStack)
     {
         //Create a new Gray scale image
         
-        Mat grayImg = toGray(imageStack[i]);
-        grayStack[i] = grayImg;
+        Mat grayImg;// = toGray(imageStack[i]);
+        Mat grayImgFloat;
+		cvtColor(imageStack[i],grayImg,CV_BGR2GRAY,1);
+		grayImg.convertTo(grayImgFloat,CV_32FC1,1/255.0);
+        
+        grayStack[i] = grayImgFloat;
         
         //grayStack[i] = imageStack[i];
 
