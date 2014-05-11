@@ -91,14 +91,27 @@
     UInt8 * buf = (UInt8 *) CFDataGetBytePtr(data);
     int length = CFDataGetLength(data);
     
-    size_t w = CGImageGetWidth(image);
+    size_t w = CGImageGetWidth(image); // w-->860
     size_t row = CGImageGetBytesPerRow(image);
-    //size_t h = CGImageGetHeight(image);
+    size_t h = CGImageGetHeight(image); //h-> 690
     
-    int x=lroundf(point.x);
-    int y=lroundf(point.y);
+    //y: 0- 373 (downwards from; matlab origin, irrespective of orientation)
+    //x: 0- 320 (right , from top left;matlab origin, irrespective of orientation)
+    float x=lroundf(point.x);
+    float y=lroundf(point.y);
     
-    int index = buf[lround(buf[x]*row + y)];
+    //Actual UIImage container dimensions on device
+    
+    float display_height= _displayImage.frame.size.height;
+    float display_width= _displayImage.frame.size.width;
+    
+    float rel_x= x/display_width;
+    float rel_y = y/display_height;
+    
+    float actual_x = rel_x * w;
+    float actual_y = rel_y * h;
+    
+    int index = buf[lround(actual_y*row + actual_x)]/10;
 //    for(int i=0; i<length; i+=4)
 //    {
 //        int r = buf[i];
@@ -123,10 +136,7 @@
     {
         for(int i=previous; i>=current;i--)
         {
-            //[NSThread sleepForTimeInterval:.5];
-            
-            
-            
+
             [UIView transitionWithView:self.view
                               duration:0.63f
                                options:UIViewAnimationOptionTransitionCrossDissolve
@@ -134,12 +144,6 @@
                                 self.displayImage.image = [[[imageStack sharedInstance] trialStack] objectAtIndex:i];
                             } completion:NULL];
             
-            //_displayImage.image = [[[imageStack sharedInstance] trialStack] objectAtIndex:i];
-            
-            
-            
-            
-            //_displayImage.image = [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:i];
         }
         
     }
@@ -148,10 +152,7 @@
     {
         for(int i=previous; i<=current; i++)
         {
-            //[NSThread sleepForTimeInterval:.5];
-            //_displayImage.image = [[[imageStack sharedInstance] trialStack] objectAtIndex:i];
-            //_displayImage.image = [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:i];
-            
+
             [UIView transitionWithView:self.view
                               duration:0.63f
                                options:UIViewAnimationOptionTransitionCrossDissolve
