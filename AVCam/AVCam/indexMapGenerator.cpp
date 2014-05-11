@@ -72,7 +72,7 @@ Mat indexMapGenerator::generateFocalIndexMap(vector<Mat> imageStack)
     
 //    Mat imageStackLocal;
 //    cvCopy(&imageStack, &imageStackLocal);
-    const int N=25;
+    const int N=9;
     Mat grayStack[N];
 	Mat focal_Measure[N];
 	
@@ -143,7 +143,7 @@ Mat indexMapGenerator::generateFocalIndexMap(vector<Mat> imageStack)
 	  		//Iterate over all the images on the stack and get the one in focus.
 	  		maxK=0;
 	  		maxVal=focal_Measure[0].at<float>(y,x);
-	 		for(int k =1; k< N; k++)
+	 		for(int k =1; k< imageStack.size(); k++)
 	 		{
 	 			tempVal=focal_Measure[k].at<float>(y,x);
 	 			// cout<<tempVal<<endl;

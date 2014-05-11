@@ -38,7 +38,9 @@
     //[recognize setDelegate:self];
     
     int previous=0;
-    UIImage* displayed = [[[imageStack sharedInstance] trialStack] objectAtIndex:0];
+    
+    UIImage* displayed = [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:0];
+    //UIImage* displayed = [[[imageStack sharedInstance] trialStack] objectAtIndex:0];
     _displayImage.image = displayed;
     
     
@@ -82,7 +84,9 @@
     //CGPoint devicePoint = [(AVCaptureVideoPreviewLayer *)[[self previewView] layer] captureDevicePointOfInterestForPoint:[gestureRecognizer locationInView:[gestureRecognizer view]]];
     
     
-    CGImageRef image = [[[[imageStack sharedInstance] trialStack] objectAtIndex:25] CGImage];
+    //CGImageRef image = [[[[imageStack sharedInstance] trialStack] objectAtIndex:25] CGImage];
+    CGImageRef image = [[[[imageStack sharedInstance] focalStackUImage] objectAtIndex:9] CGImage];
+    
     CFDataRef data = CGDataProviderCopyData(CGImageGetDataProvider(image));
     UInt8 * buf = (UInt8 *) CFDataGetBytePtr(data);
     int length = CFDataGetLength(data);
@@ -120,7 +124,8 @@
         for(int i=previous; i>=current;i--)
         {
             sleep(0.5);
-            _displayImage.image = [[[imageStack sharedInstance] trialStack] objectAtIndex:i];
+            //_displayImage.image = [[[imageStack sharedInstance] trialStack] objectAtIndex:i];
+            _displayImage.image = [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:i];
             sleep(0.5);
         }
         
@@ -130,7 +135,8 @@
     {
         for(int i=previous; i<=current; i++)
         {   sleep(0.5);
-            _displayImage.image = [[[imageStack sharedInstance] trialStack] objectAtIndex:i];
+            //_displayImage.image = [[[imageStack sharedInstance] trialStack] objectAtIndex:i];
+            _displayImage.image = [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:i];
             sleep(0.5);
         }
         
