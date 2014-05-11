@@ -72,7 +72,7 @@ Mat indexMapGenerator::generateFocalIndexMap(vector<Mat> imageStack)
     
 //    Mat imageStackLocal;
 //    cvCopy(&imageStack, &imageStackLocal);
-    const int N=9;
+    const int N=25;
     Mat grayStack[N];
 	Mat focal_Measure[N];
 	
