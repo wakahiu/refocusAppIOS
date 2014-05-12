@@ -102,11 +102,18 @@
     
     //Actual UIImage container dimensions on device
     
+    
+    //change get frame.origin.x and frame.origin.y
+    
+    float display_origin_x = _displayImage.frame.origin.x;
+    float display_origin_y = _displayImage.frame.origin.y;
+    
+    
     float display_height= _displayImage.frame.size.height;
     float display_width= _displayImage.frame.size.width;
     
-    float rel_x= x/display_width;
-    float rel_y = y/display_height;
+    float rel_x= (x-display_origin_x)/display_width;
+    float rel_y = (y-display_origin_y)/display_height;
     
     float actual_x = rel_x * w;
     float actual_y = rel_y * h;
@@ -138,7 +145,7 @@
         {
 
             [UIView transitionWithView:self.view
-                              duration:0.63f
+                              duration:0.83f
                                options:UIViewAnimationOptionTransitionCrossDissolve
                             animations:^{
                                 self.displayImage.image = [[[imageStack sharedInstance] trialStack] objectAtIndex:i];
@@ -154,7 +161,7 @@
         {
 
             [UIView transitionWithView:self.view
-                              duration:0.63f
+                              duration:0.83f
                                options:UIViewAnimationOptionTransitionCrossDissolve
                             animations:^{
                                 self.displayImage.image = [[[imageStack sharedInstance] trialStack] objectAtIndex:i];

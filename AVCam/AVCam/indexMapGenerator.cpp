@@ -85,7 +85,11 @@ Mat indexMapGenerator::generateFocalIndexMap(vector<Mat> imageStack)
 	Mat boostingFilter = Mat(3, 3, CV_32FC1, kernel);
 
     int i,x,y;
-    
+    int rows;
+	int cols;
+
+    rows= imageStack[0].rows;
+    cols= imageStack[0].cols;
     for(i = 0; i < imageStack.size(); i++)
     {
         //Create a new Gray scale image
@@ -113,7 +117,10 @@ Mat indexMapGenerator::generateFocalIndexMap(vector<Mat> imageStack)
 		filter2D(modLaplacian, boosted, -1, boostingFilter);
         
         //averaging values of the focal measure: average filter preferred ouver gaussian filter as gaussian does not resolve the issue of noisy patches
-		Size ksize(19,19);
+        
+        x=round(rows/30);
+        y=round(cols/30);
+		Size ksize(x,y);
 		Mat modLapSmooth;
 		boxFilter(boosted,modLapSmooth,-1,ksize);
         
@@ -121,8 +128,6 @@ Mat indexMapGenerator::generateFocalIndexMap(vector<Mat> imageStack)
         
     }
     
-    int rows;
-	int cols;
     
 	rows=focal_Measure[0].rows;
 	cols=focal_Measure[0].cols;

@@ -536,7 +536,7 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
         
 
         
-    /* Actual stuff - Sid ------------ */
+    /* Actual stuff -  Sid ------------ */
 //    for (NSInteger k=0; k< [[[imageStack sharedInstance] focalStackUImage]  count]; k++)
 //    {
 //        UIImage *temp= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:k];
