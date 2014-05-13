@@ -72,9 +72,14 @@ Mat indexMapGenerator::generateFocalIndexMap(vector<Mat> imageStack)
     
 //    Mat imageStackLocal;
 //    cvCopy(&imageStack, &imageStackLocal);
-    const int N=25;
-    Mat grayStack[N];
-	Mat focal_Measure[N];
+    
+    
+    //const int N=9; // removing
+    //Mat grayStack[N];
+	//Mat focal_Measure[N];
+    
+    Vector<Mat> grayStack;
+    Vector<Mat> focal_Measure;
 	
     
 	Mat lap_x;
@@ -90,6 +95,8 @@ Mat indexMapGenerator::generateFocalIndexMap(vector<Mat> imageStack)
 
     rows= imageStack[0].rows;
     cols= imageStack[0].cols;
+    //int temp= imageStack.size();
+    
     for(i = 0; i < imageStack.size(); i++)
     {
         //Create a new Gray scale image
@@ -99,7 +106,8 @@ Mat indexMapGenerator::generateFocalIndexMap(vector<Mat> imageStack)
 		cvtColor(imageStack[i],grayImg,CV_BGR2GRAY,1);
 		grayImg.convertTo(grayImgFloat,CV_32FC1,1/255.0);
         
-        grayStack[i] = grayImgFloat;
+        //grayStack[i] = grayImgFloat;
+        grayStack.push_back(grayImgFloat) ;
         
         //grayStack[i] = imageStack[i];
 
@@ -124,7 +132,8 @@ Mat indexMapGenerator::generateFocalIndexMap(vector<Mat> imageStack)
 		Mat modLapSmooth;
 		boxFilter(boosted,modLapSmooth,-1,ksize);
         
-        focal_Measure[i]=modLapSmooth;
+        //focal_Measure[i]=modLapSmooth;
+        focal_Measure.push_back(modLapSmooth) ;
         
     }
     

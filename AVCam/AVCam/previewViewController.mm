@@ -17,6 +17,16 @@
 
 @implementation previewViewController
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -39,8 +49,8 @@
     
     int previous=0;
     
-    //UIImage* displayed = [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:0];
-    UIImage* displayed = [[[imageStack sharedInstance] trialStack] objectAtIndex:0];
+    UIImage* displayed = [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:0];
+    //UIImage* displayed = [[[imageStack sharedInstance] trialStack] objectAtIndex:0];
     _displayImage.image = displayed;
     
     
@@ -83,9 +93,9 @@
 
     //CGPoint devicePoint = [(AVCaptureVideoPreviewLayer *)[[self previewView] layer] captureDevicePointOfInterestForPoint:[gestureRecognizer locationInView:[gestureRecognizer view]]];
     
+    NSInteger count=[[[imageStack sharedInstance] focalStackUImage] count];
     
-    CGImageRef image = [[[[imageStack sharedInstance] trialStack] objectAtIndex:25] CGImage];
-    //CGImageRef image = [[[[imageStack sharedInstance] focalStackUImage] objectAtIndex:9] CGImage];
+    CGImageRef image = [[[[imageStack sharedInstance] focalStackUImage] objectAtIndex:count-1] CGImage];
     
     CFDataRef data = CGDataProviderCopyData(CGImageGetDataProvider(image));
     UInt8 * buf = (UInt8 *) CFDataGetBytePtr(data);
@@ -148,7 +158,8 @@
                               duration:0.83f
                                options:UIViewAnimationOptionTransitionCrossDissolve
                             animations:^{
-                                self.displayImage.image = [[[imageStack sharedInstance] trialStack] objectAtIndex:i];
+                                //self.displayImage.image = [[[imageStack sharedInstance] trialStack] objectAtIndex:i];
+                                self.displayImage.image = [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:i];
                             } completion:NULL];
             
         }
@@ -164,7 +175,8 @@
                               duration:0.83f
                                options:UIViewAnimationOptionTransitionCrossDissolve
                             animations:^{
-                                self.displayImage.image = [[[imageStack sharedInstance] trialStack] objectAtIndex:i];
+                                //self.displayImage.image = [[[imageStack sharedInstance] trialStack] objectAtIndex:i];
+                                self.displayImage.image = [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:i];
                             } completion:NULL];
             
 

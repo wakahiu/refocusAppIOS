@@ -48,6 +48,9 @@
 		ECEC6B45191CDEC300FB3EEB /* frame8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ECEC6B2C191CDEC300FB3EEB /* frame8.jpg */; };
 		ECEC6B46191CDEC300FB3EEB /* frame9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ECEC6B2D191CDEC300FB3EEB /* frame9.jpg */; };
 		ECEC6B4F191E8C5D00FB3EEB /* previewViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = ECEC6B4E191E8C5D00FB3EEB /* previewViewController.mm */; };
+		ECF62762192286FE00C5280C /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECF62761192286FE00C5280C /* FirstViewController.m */; };
+		ECF627651922B58B00C5280C /* viewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECF627641922B58B00C5280C /* viewViewController.m */; };
+		ECF627671922D25600C5280C /* focal_map.png in Resources */ = {isa = PBXBuildFile; fileRef = ECF627661922D25600C5280C /* focal_map.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -103,6 +106,11 @@
 		ECEC6B2D191CDEC300FB3EEB /* frame9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = frame9.jpg; path = stack/frame9.jpg; sourceTree = "<group>"; };
 		ECEC6B4D191E8C5D00FB3EEB /* previewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = previewViewController.h; sourceTree = "<group>"; };
 		ECEC6B4E191E8C5D00FB3EEB /* previewViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = previewViewController.mm; sourceTree = "<group>"; };
+		ECF62760192286FE00C5280C /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
+		ECF62761192286FE00C5280C /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		ECF627631922B58B00C5280C /* viewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = viewViewController.h; sourceTree = "<group>"; };
+		ECF627641922B58B00C5280C /* viewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = viewViewController.m; sourceTree = "<group>"; };
+		ECF627661922D25600C5280C /* focal_map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = focal_map.png; path = stack/focal_map.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +165,10 @@
 				2FDA781B176DB79700509279 /* AVCamPreviewView.h */,
 				2FDA781C176DB79700509279 /* AVCamPreviewView.m */,
 				2F360BB717692C4700D9A404 /* Main_iPhone.storyboard */,
+				ECF627631922B58B00C5280C /* viewViewController.h */,
+				ECF627641922B58B00C5280C /* viewViewController.m */,
+				ECF62760192286FE00C5280C /* FirstViewController.h */,
+				ECF62761192286FE00C5280C /* FirstViewController.m */,
 				2F360BBA17692C4700D9A404 /* Main_iPad.storyboard */,
 				2F360BC017692C4700D9A404 /* Images.xcassets */,
 				2F360BAC17692C4700D9A404 /* Supporting Files */,
@@ -167,6 +179,7 @@
 		2F360BAC17692C4700D9A404 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				ECF627661922D25600C5280C /* focal_map.png */,
 				ECEC6B15191CDEC300FB3EEB /* frame1.jpg */,
 				ECEC6B16191CDEC300FB3EEB /* frame10.jpg */,
 				ECEC6B17191CDEC300FB3EEB /* frame11.jpg */,
@@ -293,6 +306,7 @@
 				ECEC6B30191CDEC300FB3EEB /* frame11.jpg in Resources */,
 				ECEC6B38191CDEC300FB3EEB /* frame19.jpg in Resources */,
 				ECEC6B44191CDEC300FB3EEB /* frame7.jpg in Resources */,
+				ECF627671922D25600C5280C /* focal_map.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,6 +318,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F360BB217692C4700D9A404 /* main.m in Sources */,
+				ECF62762192286FE00C5280C /* FirstViewController.m in Sources */,
 				ECEC6AF6191C616000FB3EEB /* imageStack.mm in Sources */,
 				2F360BBF17692C4700D9A404 /* AVCamViewController.mm in Sources */,
 				ECEC6B4F191E8C5D00FB3EEB /* previewViewController.mm in Sources */,
@@ -311,6 +326,7 @@
 				ECEC6B0A191C8C8E00FB3EEB /* UIImage+OpenCV.mm in Sources */,
 				2FDA781D176DB79700509279 /* AVCamPreviewView.m in Sources */,
 				2F360BB617692C4700D9A404 /* AVCamAppDelegate.m in Sources */,
+				ECF627651922B58B00C5280C /* viewViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

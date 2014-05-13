@@ -362,7 +362,7 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
         {
             for (int j=0; j<3; j++)
             {
-                CGPoint devicePoint = CGPointMake(i*.33 +0.16, j*0.33+0.16);
+                CGPoint devicePoint = CGPointMake((2-i)*.33 +0.16, (2-j)*0.33+0.16);
         
                 [self focusWithMode:AVCaptureFocusModeAutoFocus exposeWithMode:AVCaptureExposureModeAutoExpose atDevicePoint:devicePoint monitorSubjectAreaChange:YES];
             
@@ -520,11 +520,6 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
         //Generate focalIndexStack
         Mat focalIndex;
         
-        UIImage *try1 =[[UIImage alloc] initWithCVMat:focalStackCvMatTrial[0]];
-        UIImage *try2 =[[UIImage alloc] initWithCVMat:focalStackCvMatTrial[5]];
-        UIImage *try3 =[[UIImage alloc] initWithCVMat:focalStackCvMatTrial[10]];
-        UIImage *try4 =[[UIImage alloc] initWithCVMat:focalStackCvMatTrial[15]];
-        UIImage *try5 =[[UIImage alloc] initWithCVMat:focalStackCvMatTrial[20]];
         
         focalIndex= indexMapGenerator::generateFocalIndexMap(focalStackCvMatTrial);
         UIImage *converted =[[UIImage alloc] initWithCVMat:focalIndex];
@@ -537,22 +532,31 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
 
         
     /* Actual stuff -  Sid ------------ */
-//    for (NSInteger k=0; k< [[[imageStack sharedInstance] focalStackUImage]  count]; k++)
-//    {
-//        UIImage *temp= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:k];
-//        focalStackCvMat.push_back([temp CVMat]);
-//        //UIImage *converted =[[UIImage alloc] initWithCVMat:focalStackCvMat[k]];
-//    }
-//        //Generate focalIndexStack
-//        Mat focalIndex;
-//        
-//        focalIndex= indexMapGenerator::generateFocalIndexMap(focalStackCvMat);
-//        UIImage *converted =[[UIImage alloc] initWithCVMat:focalIndex];
+    for (NSInteger k=0; k< [[[imageStack sharedInstance] focalStackUImage]  count]; k++)
+    {
+        UIImage *temp= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:k];
+        focalStackCvMat.push_back([temp CVMat]);
+        //UIImage *converted =[[UIImage alloc] initWithCVMat:focalStackCvMat[k]];
+    }
+        //Generate focalIndexStack
+        
+        focalIndex= indexMapGenerator::generateFocalIndexMap(focalStackCvMat);
+        converted =[[UIImage alloc] initWithCVMat:focalIndex];
         
         
-        //[[[imageStack sharedInstance] focalStackUImage] addObject:converted];
+        UIImage *temp1= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:0];
+        UIImage *temp2= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:1];
+        UIImage *temp3= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:2];
+        UIImage *temp4= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:3];
+        UIImage *temp5= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:4];
+        UIImage *temp6= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:5];
+        UIImage *temp7= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:6];
+        UIImage *temp8= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:7];
+        UIImage *temp9= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:8];
+        
+        [[[imageStack sharedInstance] focalStackUImage] addObject:converted];
 
-        //NSLog(@"fingers crossed! %lu", focalStackCvMat.size());
+        NSLog(@"fingers crossed! %lu", focalStackCvMat.size());
         
         [_secretButton sendActionsForControlEvents: UIControlEventTouchUpInside];
 	});
