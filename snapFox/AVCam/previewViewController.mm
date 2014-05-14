@@ -1,6 +1,6 @@
 //
 //  previewViewController.m
-//  AVCam
+//  snapFox
 //
 //  Created by Siddhartha Chandra on 5/10/14.
 //  Copyright (c) 2014 Apple Inc. All rights reserved.
@@ -101,7 +101,7 @@
     
     CFDataRef data = CGDataProviderCopyData(CGImageGetDataProvider(image));
     UInt8 * buf = (UInt8 *) CFDataGetBytePtr(data);
-    int length = CFDataGetLength(data);
+    //int length = CFDataGetLength(data);
     
     size_t w = CGImageGetWidth(image); // w-->860
     size_t row = CGImageGetBytesPerRow(image);

@@ -1,6 +1,6 @@
 //
 //  viewViewController.h
-//  AVCam
+//  snapFox
 //
 //  Created by Siddhartha Chandra on 5/13/14.
 //  Copyright (c) 2014 Apple Inc. All rights reserved.

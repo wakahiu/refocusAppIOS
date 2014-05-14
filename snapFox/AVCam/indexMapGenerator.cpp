@@ -1,6 +1,6 @@
 //
 //  indexMapGenerator.cpp
-//  AVCam
+//  snapFox
 //
 //  Created by Siddhartha Chandra on 5/8/14.
 //  Copyright (c) 2014 Apple Inc. All rights reserved.
@@ -21,8 +21,8 @@ Mat indexMapGenerator::toGray(Mat img){
 	
 	float * grayPtr = (float *)grayImg.data;
 	unsigned char * imgPtr = (unsigned char *) img.data;
-	int grayStep = grayImg.step/sizeof(float);
-	int imgStep = img.step/sizeof(unsigned char);
+	int grayStep = int(grayImg.step/sizeof(float));
+	int imgStep = int(img.step/sizeof(unsigned char));
 	
 	//Loop over the image pixels. Convert to float to avoid precision issues.
 	for(int  y = 0; y < img.rows; y++){

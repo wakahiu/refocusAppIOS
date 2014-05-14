@@ -437,15 +437,15 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
         UIImage *converted =[[UIImage alloc] initWithCVMat:focalIndex];
         
         
-        UIImage *temp1= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:0];
-        UIImage *temp2= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:1];
-        UIImage *temp3= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:2];
-        UIImage *temp4= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:3];
-        UIImage *temp5= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:4];
-        UIImage *temp6= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:5];
-        UIImage *temp7= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:6];
-        UIImage *temp8= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:7];
-        UIImage *temp9= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:8];
+//        UIImage *temp1= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:0];
+//        UIImage *temp2= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:1];
+//        UIImage *temp3= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:2];
+//        UIImage *temp4= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:3];
+//        UIImage *temp5= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:4];
+//        UIImage *temp6= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:5];
+//        UIImage *temp7= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:6];
+//        UIImage *temp8= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:7];
+//        UIImage *temp9= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:8];
         
         [[[imageStack sharedInstance] focalStackUImage] addObject:converted];
 
