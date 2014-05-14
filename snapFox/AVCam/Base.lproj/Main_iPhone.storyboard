@@ -96,6 +96,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
+                                            <action selector="backButtonPush:" destination="q4J-HI-hzn" eventType="touchUpInside" id="IBn-6X-nat"/>
                                             <segue destination="BQ5-0x-BiU" kind="modal" modalTransitionStyle="crossDissolve" id="Icc-Ad-5sB"/>
                                         </connections>
                                     </button>
@@ -268,6 +269,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="eLa-Vx-Cko"/>
+        <segue reference="Icc-Ad-5sB"/>
     </inferredMetricsTieBreakers>
 </document>

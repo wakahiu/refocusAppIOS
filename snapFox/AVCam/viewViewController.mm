@@ -122,7 +122,7 @@
     //[trialStack addObject:tr];
     
     
-    [[[imageStack sharedInstance] trialStack] removeAllObjects];
+
     
     
     [[[imageStack sharedInstance] trialStack] addObject:[UIImage imageWithContentsOfFile:filePath1]];
@@ -315,5 +315,9 @@
     //NSLog(@"index %d",index );
 }
 - (IBAction)backButtonPush:(id)sender {
+    
+        extern int previous;
+    previous=0;
+      [[[imageStack sharedInstance] trialStack] removeAllObjects];
 }
 @end

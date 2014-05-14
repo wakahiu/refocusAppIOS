@@ -357,7 +357,6 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
 		
 
     //Sid - Capture multiple images.
-        [[[imageStack sharedInstance] focalStackUImage] removeAllObjects];
     
         for (int i=0; i<3; i++)
         {

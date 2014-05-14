@@ -192,5 +192,9 @@
     //NSLog(@"index %d",index );
 }
 - (IBAction)homeButtonAction:(id)sender {
+    
+    extern int previous;
+    previous=0;
+    [[[imageStack sharedInstance] focalStackUImage] removeAllObjects];
 }
 @end
