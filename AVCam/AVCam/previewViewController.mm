@@ -11,6 +11,8 @@
 
 @interface previewViewController ()
 - (IBAction)findIndex:(UITapGestureRecognizer *)recognize;
+@property (weak, nonatomic) IBOutlet UIButton *homeButton;
+- (IBAction)homeButtonAction:(id)sender;
 
 
 @end
@@ -47,7 +49,7 @@
 
     //[recognize setDelegate:self];
     
-    int previous=0;
+    //int previous=0;
     
     UIImage* displayed = [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:0];
     //UIImage* displayed = [[[imageStack sharedInstance] trialStack] objectAtIndex:0];
@@ -188,5 +190,7 @@
     previous=current;
     //_displayImage.image = [[[imageStack sharedInstance] trialStack] objectAtIndex:index];
     //NSLog(@"index %d",index );
+}
+- (IBAction)homeButtonAction:(id)sender {
 }
 @end

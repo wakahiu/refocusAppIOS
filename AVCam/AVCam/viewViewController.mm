@@ -11,23 +11,28 @@
 #import "imageStack.h"
 #import "UIImage+OpenCV.h"
 
-
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "AVCamPreviewView.h"
 #import "indexMapGenerator.hpp"
 
 @interface viewViewController ()
+
+
+- (IBAction)findIndex:(UITapGestureRecognizer *)recognize;
+
 @property (weak, nonatomic) IBOutlet UIImageView *displayedImage;
+
+@property (weak, nonatomic) IBOutlet UIButton *backButton;
+
+@property (weak, nonatomic) IBOutlet UIButton *onBackPress;
+
+@property (nonatomic) dispatch_queue_t sessionQueue;
 
 @end
 
 @implementation viewViewController
 
 
-
-
-- (IBAction)backButton:(id)sender {
-}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -56,7 +61,7 @@
     
     //trial----------------test
 
-    vector<Mat> focalStackCvMatTrial;
+
     
     
     NSString* filePath1= [[NSBundle mainBundle] pathForResource:@"frame1" ofType:@"jpg"];
@@ -150,7 +155,17 @@
     [[[imageStack sharedInstance] trialStack] addObject:[UIImage imageWithContentsOfFile:filePath25]];
     
    
-    UIImage *temp= [[[imageStack sharedInstance] trialStack] objectAtIndex:0];
+    UIImage* displayed = [[[imageStack sharedInstance] trialStack] objectAtIndex:0];
+    _displayedImage.image = displayed;
+    
+    //creates an alternate queue
+	dispatch_queue_t sessionQueue = dispatch_queue_create("session queue", DISPATCH_QUEUE_SERIAL);
+	[self setSessionQueue:sessionQueue];
+    
+
+    
+    //dispatch_async([self sessionQueue], ^{
+            vector<Mat> focalStackCvMatTrial;
     
     for (NSInteger k=0; k< [[[imageStack sharedInstance] trialStack]  count]; k++)
     {
@@ -159,6 +174,7 @@
         //UIImage *converted =[[UIImage alloc] initWithCVMat:focalStackCvMat[k]];
     }
     
+
     //Generate focalIndexStack
     Mat focalIndex;
     
@@ -169,20 +185,8 @@
     [[[imageStack sharedInstance] trialStack] addObject:converted];
     
     NSLog(@"fingers crossed! %lu", focalStackCvMatTrial.size());
-    
-    
-    UIImage* displayed = [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:0];
-    _displayedImage.image = displayed;
-    
-    
-    
-    
-    
-    
-    
-    //    const unsigned char * buffer =  CFDataGetBytePtr(data);
-    NSLog(@"try");
-    
+    //});
+
     
 }
 
@@ -203,4 +207,113 @@
 }
 */
 
+- (IBAction)findIndex:(UITapGestureRecognizer *)recognize {
+    NSLog(@"reached");
+    
+    
+    
+    CGPoint point = [recognize locationInView:self.view];
+    
+    NSLog(@"pointx %f and point y%f", point.x,point.y);
+    //CGPoint topLeft = [self.layer captureDevicePointOfInterestForPoint:point];
+    
+    //CGPoint devicePoint = [(AVCaptureVideoPreviewLayer *)[[self previewView] layer] captureDevicePointOfInterestForPoint:[gestureRecognizer locationInView:[gestureRecognizer view]]];
+    
+    NSInteger count=[[[imageStack sharedInstance] trialStack] count];
+    CGImageRef image = [[[[imageStack sharedInstance] trialStack] objectAtIndex:count-1] CGImage];
+    
+    CFDataRef data = CGDataProviderCopyData(CGImageGetDataProvider(image));
+    UInt8 * buf = (UInt8 *) CFDataGetBytePtr(data);
+    int length = CFDataGetLength(data);
+    
+    size_t w = CGImageGetWidth(image); // w-->860
+    size_t row = CGImageGetBytesPerRow(image);
+    size_t h = CGImageGetHeight(image); //h-> 690
+    
+    //y: 0- 373 (downwards from; matlab origin, irrespective of orientation)
+    //x: 0- 320 (right , from top left;matlab origin, irrespective of orientation)
+    float x=lroundf(point.x);
+    float y=lroundf(point.y);
+    
+    //Actual UIImage container dimensions on device
+    
+    
+    //change get frame.origin.x and frame.origin.y
+    
+    float display_origin_x = _displayedImage.frame.origin.x;
+    float display_origin_y = _displayedImage.frame.origin.y;
+    
+    
+    float display_height= _displayedImage.frame.size.height;
+    float display_width= _displayedImage.frame.size.width;
+    
+    float rel_x= (x-display_origin_x)/display_width;
+    float rel_y = (y-display_origin_y)/display_height;
+    
+    float actual_x = rel_x * w;
+    float actual_y = rel_y * h;
+    
+    int index = buf[lround(actual_y*row + actual_x)]/10;
+    //    for(int i=0; i<length; i+=4)
+    //    {
+    //        int r = buf[i];
+    //        int g = buf[i+1];
+    //        int b = buf[i+2];
+    //        NSLog(@"red %d", r);
+    //        NSLog(@"green %d", g);
+    //        NSLog(@"blue %d", b);
+    //    }
+    CFRelease(data);
+    
+    
+    //    Begin transition effect
+    int step;
+    int current = 0;
+    extern int previous;
+    current= index;
+    step=current-previous;
+    
+    
+    if(step<1)
+    {
+        for(int i=previous; i>=current;i--)
+        {
+            
+            [UIView transitionWithView:self.view
+                              duration:0.83f
+                               options:UIViewAnimationOptionTransitionCrossDissolve
+                            animations:^{
+                                self.displayedImage.image = [[[imageStack sharedInstance] trialStack] objectAtIndex:i];
+                                
+                            } completion:NULL];
+            
+        }
+        
+    }
+    
+    else
+    {
+        for(int i=previous; i<=current; i++)
+        {
+            
+            [UIView transitionWithView:self.view
+                              duration:0.83f
+                               options:UIViewAnimationOptionTransitionCrossDissolve
+                            animations:^{
+                                self.displayedImage.image = [[[imageStack sharedInstance] trialStack] objectAtIndex:i];
+                                
+                            } completion:NULL];
+            
+            
+        }
+        
+        
+        
+    }
+    previous=current;
+    //_displayImage.image = [[[imageStack sharedInstance] trialStack] objectAtIndex:index];
+    //NSLog(@"index %d",index );
+}
+- (IBAction)backButtonPush:(id)sender {
+}
 @end

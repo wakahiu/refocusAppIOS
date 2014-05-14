@@ -126,8 +126,8 @@ Mat indexMapGenerator::generateFocalIndexMap(vector<Mat> imageStack)
         
         //averaging values of the focal measure: average filter preferred ouver gaussian filter as gaussian does not resolve the issue of noisy patches
         
-        x=round(rows/30);
-        y=round(cols/30);
+        x=round(rows/20);
+        y=round(cols/20);
 		Size ksize(x,y);
 		Mat modLapSmooth;
 		boxFilter(boosted,modLapSmooth,-1,ksize);
