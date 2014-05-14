@@ -54,8 +54,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2F360BA217692C4700D9A404 /* AVCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AVCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		2F360BAD17692C4700D9A404 /* AVCam-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AVCam-Info.plist"; sourceTree = "<group>"; };
+		2F360BA217692C4700D9A404 /* snapFox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = snapFox.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F360BAD17692C4700D9A404 /* snapFox-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "snapFox-Info.plist"; sourceTree = "<group>"; };
 		2F360BAF17692C4700D9A404 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2F360BB117692C4700D9A404 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2F360BB417692C4700D9A404 /* AVCamAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVCamAppDelegate.h; sourceTree = "<group>"; };
@@ -134,7 +134,7 @@
 				ECEC6B0B191C8EBB00FB3EEB /* libc++.dylib */,
 				ECEC6AF8191C6DAA00FB3EEB /* opencv2.framework */,
 				2F90F0AD178E8C450015CE45 /* ReadMe.txt */,
-				2F360BAB17692C4700D9A404 /* AVCam */,
+				2F360BAB17692C4700D9A404 /*  snapFox */,
 				2F360BA317692C4700D9A404 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -142,12 +142,12 @@
 		2F360BA317692C4700D9A404 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2F360BA217692C4700D9A404 /* AVCam.app */,
+				2F360BA217692C4700D9A404 /* snapFox.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2F360BAB17692C4700D9A404 /* AVCam */ = {
+		2F360BAB17692C4700D9A404 /*  snapFox */ = {
 			isa = PBXGroup;
 			children = (
 				2F360BB417692C4700D9A404 /* AVCamAppDelegate.h */,
@@ -173,6 +173,7 @@
 				2F360BC017692C4700D9A404 /* Images.xcassets */,
 				2F360BAC17692C4700D9A404 /* Supporting Files */,
 			);
+			name = " snapFox";
 			path = AVCam;
 			sourceTree = "<group>";
 		};
@@ -207,7 +208,7 @@
 				ECEC6B2D191CDEC300FB3EEB /* frame9.jpg */,
 				ECEC6B12191CC0CF00FB3EEB /* lena.jpg */,
 				ECEC6B00191C74A800FB3EEB /* AVCam-Prefix.pch */,
-				2F360BAD17692C4700D9A404 /* AVCam-Info.plist */,
+				2F360BAD17692C4700D9A404 /* snapFox-Info.plist */,
 				2F360BAE17692C4700D9A404 /* InfoPlist.strings */,
 				2F360BB117692C4700D9A404 /* main.m */,
 			);
@@ -217,9 +218,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2F360BA117692C4700D9A404 /* AVCam */ = {
+		2F360BA117692C4700D9A404 /* snapFox */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2F360BD717692C4700D9A404 /* Build configuration list for PBXNativeTarget "AVCam" */;
+			buildConfigurationList = 2F360BD717692C4700D9A404 /* Build configuration list for PBXNativeTarget "snapFox" */;
 			buildPhases = (
 				2F360B9E17692C4700D9A404 /* Sources */,
 				2F360BA017692C4700D9A404 /* Resources */,
@@ -229,9 +230,9 @@
 			);
 			dependencies = (
 			);
-			name = AVCam;
+			name = snapFox;
 			productName = AVCam;
-			productReference = 2F360BA217692C4700D9A404 /* AVCam.app */;
+			productReference = 2F360BA217692C4700D9A404 /* snapFox.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -253,7 +254,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2F360B9D17692C4700D9A404 /* Build configuration list for PBXProject "AVCam" */;
+			buildConfigurationList = 2F360B9D17692C4700D9A404 /* Build configuration list for PBXProject "snapFox" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -266,7 +267,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2F360BA117692C4700D9A404 /* AVCam */,
+				2F360BA117692C4700D9A404 /* snapFox */,
 			);
 		};
 /* End PBXProject section */
@@ -443,8 +444,8 @@
 					/Users/siddharthachandra/columbia_sem2/subjects/cvml,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				INFOPLIST_FILE = "AVCam/AVCam-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "AVCam/snapFox-Info.plist";
+				PRODUCT_NAME = snapFox;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -460,8 +461,8 @@
 					/Users/siddharthachandra/columbia_sem2/subjects/cvml,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				INFOPLIST_FILE = "AVCam/AVCam-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "AVCam/snapFox-Info.plist";
+				PRODUCT_NAME = snapFox;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -469,7 +470,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2F360B9D17692C4700D9A404 /* Build configuration list for PBXProject "AVCam" */ = {
+		2F360B9D17692C4700D9A404 /* Build configuration list for PBXProject "snapFox" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2F360BD517692C4700D9A404 /* Debug */,
@@ -478,7 +479,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2F360BD717692C4700D9A404 /* Build configuration list for PBXNativeTarget "AVCam" */ = {
+		2F360BD717692C4700D9A404 /* Build configuration list for PBXNativeTarget "snapFox" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2F360BD817692C4700D9A404 /* Debug */,

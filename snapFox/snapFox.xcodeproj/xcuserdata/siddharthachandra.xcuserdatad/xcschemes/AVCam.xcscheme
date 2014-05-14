@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2F360BA117692C4700D9A404"
                BuildableName = "AVCam.app"
-               BlueprintName = "AVCam"
-               ReferencedContainer = "container:AVCam.xcodeproj">
+               BlueprintName = "snapFox"
+               ReferencedContainer = "container:snapFox.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,8 +34,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2F360BA117692C4700D9A404"
             BuildableName = "AVCam.app"
-            BlueprintName = "AVCam"
-            ReferencedContainer = "container:AVCam.xcodeproj">
+            BlueprintName = "snapFox"
+            ReferencedContainer = "container:snapFox.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -53,8 +53,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2F360BA117692C4700D9A404"
             BuildableName = "AVCam.app"
-            BlueprintName = "AVCam"
-            ReferencedContainer = "container:AVCam.xcodeproj">
+            BlueprintName = "snapFox"
+            ReferencedContainer = "container:snapFox.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -71,8 +71,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2F360BA117692C4700D9A404"
             BuildableName = "AVCam.app"
-            BlueprintName = "AVCam"
-            ReferencedContainer = "container:AVCam.xcodeproj">
+            BlueprintName = "snapFox"
+            ReferencedContainer = "container:snapFox.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

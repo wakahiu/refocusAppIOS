@@ -5,7 +5,7 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>4ACEF875-3976-4AC1-91C7-B2E0A1855C14</string>
+	<string>4FF354E0-301A-4884-970B-804D77F3A95B</string>
 	<key>IDESourceControlProjectName</key>
 	<string>AVCam</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
@@ -14,7 +14,7 @@
 		<string>https://github.com/wakahiu/refocusAppIOS.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>AVCam/AVCam.xcodeproj/project.xcworkspace</string>
+	<string>snapFox/AVCam.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>0C9819ED-3358-4CB4-BB9E-A8F0331890A6</key>
