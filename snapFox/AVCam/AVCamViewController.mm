@@ -113,15 +113,7 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
     //creates an album
     _secretButton.hidden= YES;
     
-    [[[ALAssetsLibrary alloc] init] addAssetsGroupAlbumWithName:@"new"
-     
-    resultBlock:^(ALAssetsGroup *group)
-     {
-         NSLog(@"added album");
-     }
-    failureBlock:^(NSError *error) {
-        NSLog(@"error adding album");
-    }];
+    
 
 
 	// Create the AVCaptureSession
@@ -277,68 +269,7 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
 #pragma mark Actions
 
 
--(void)addAssetURL:(NSURL*)assetURL toAlbum:(NSString*)albumName withCompletionBlock:(SaveImageCompletion)completionBlock
-{
-    __block BOOL albumWasFound = NO;
-    
-    ALAssetsLibrary *library= [[ALAssetsLibrary alloc] init];
-    
-    //search all photo albums in the library
-    [library enumerateGroupsWithTypes:ALAssetsGroupAlbum
-                           usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-                               
-                               //compare the names of the albums
-                               if ([albumName compare: [group valueForProperty:ALAssetsGroupPropertyName]]==NSOrderedSame) {
-                                   
-                                   //target album is found
-                                   albumWasFound = YES;
-                                   
-                                   //get a hold of the photo's asset instance
-                                   [library assetForURL: assetURL
-                                            resultBlock:^(ALAsset *asset) {
-                                                
-                                                //add photo to the target album
-                                                [group addAsset: asset];
-                                                
-                                                //run the completion block
-                                                completionBlock(nil);
-                                                
-                                            } failureBlock: completionBlock];
-                                   
-                                   //album was found, bail out of the method
-                                   return;
-                               }
-                               
-                               if (group==nil && albumWasFound==NO) {
-                                   //photo albums are over, target album does not exist, thus create it
-                                   
-                                   __weak ALAssetsLibrary* weakSelf = library;
-                                   
-                                   //create new assets album
-                                   [library addAssetsGroupAlbumWithName:albumName
-                                                            resultBlock:^(ALAssetsGroup *group) {
-                                                                
-                                                                //get the photo's instance
-                                                                [weakSelf assetForURL: assetURL
-                                                                          resultBlock:^(ALAsset *asset) {
-                                                                              
-                                                                              //add photo to the newly created album
-                                                                              [group addAsset: asset];
-                                                                              
-                                                                              //call the completion block
-                                                                              completionBlock(nil);
-                                                                              
-                                                                          } failureBlock: completionBlock];
-                                                                
-                                                            } failureBlock: completionBlock];
-                                   
-                                   //should be the last iteration anyway, but just in case
-                                   return;
-                               }
-                               
-                           } failureBlock: completionBlock];
-    
-}
+
 
 
 
@@ -378,28 +309,7 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
                         UIImage *image = [[UIImage alloc] initWithData:imageData];
                         
                         [[[imageStack sharedInstance] focalStackUImage] addObject:image];
-                    
-/* SC3653 - writes file to a given folder. Commenting temporarily to check for global focal Stack */
- 
-//                        [[[ALAssetsLibrary alloc] init] writeImageToSavedPhotosAlbum:[image CGImage] orientation:(ALAssetOrientation)[image imageOrientation] completionBlock:^(NSURL *assetURL, NSError *error)
-//                        
-//                        {
-//                            if (error) {
-//                                NSLog(@"error");
-//                            } else {
-//                                NSLog(@"url %@", assetURL);
-//                                
-//                                //add the asset to the custom photo album
-//                                [self addAssetURL: assetURL
-//                                          toAlbum:@"new"
-//                                    withCompletionBlock:^(NSError *error) {
-//                                  if (error!=nil) {
-//                                      NSLog(@"Big error: %@", [error description]);
-//                                  }
-//                              }];
-//                            }  
-//                        }];
-/**********************************************/
+
                         
                     }
                 }];
@@ -436,19 +346,9 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
         UIImage *converted =[[UIImage alloc] initWithCVMat:focalIndex];
         
         
-//        UIImage *temp1= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:0];
-//        UIImage *temp2= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:1];
-//        UIImage *temp3= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:2];
-//        UIImage *temp4= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:3];
-//        UIImage *temp5= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:4];
-//        UIImage *temp6= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:5];
-//        UIImage *temp7= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:6];
-//        UIImage *temp8= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:7];
-//        UIImage *temp9= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:8];
-        
         [[[imageStack sharedInstance] focalStackUImage] addObject:converted];
 
-        NSLog(@"fingers crossed! %lu", focalStackCvMat.size());
+       // NSLog(@"fingers crossed! %lu", focalStackCvMat.size());
         
         [_secretButton sendActionsForControlEvents: UIControlEventTouchUpInside];
 	});

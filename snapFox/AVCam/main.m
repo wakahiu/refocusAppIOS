@@ -49,6 +49,7 @@
 
 #import "AVCamAppDelegate.h"
 int previous = 0;
+int sampleCount=1;
 
 int main(int argc, char * argv[])
 {

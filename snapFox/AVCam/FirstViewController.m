@@ -37,15 +37,15 @@
     // Do any additional setup after loading the view.
     
     
-    NSString* filePath = [[NSBundle mainBundle]
-                        pathForResource:@"lena" ofType:@"jpg"];
-    UIImage *lena = [UIImage imageWithContentsOfFile:filePath];
-    
-    UIImage *imageToDisplay =    [UIImage imageWithCGImage:[lena CGImage]
-                        scale:1.0
-                  orientation: UIImageOrientationUp];
-    
-    _firstImage.image = imageToDisplay;
+//    NSString* filePath = [[NSBundle mainBundle]
+//                        pathForResource:@"lena" ofType:@"jpg"];
+//    UIImage *lena = [UIImage imageWithContentsOfFile:filePath];
+//    
+//    UIImage *imageToDisplay =    [UIImage imageWithCGImage:[lena CGImage]
+//                        scale:1.0
+//                  orientation: UIImageOrientationUp];
+//    
+//    _firstImage.image = imageToDisplay;
    
     
 }

@@ -8,12 +8,15 @@
 
 #import "previewViewController.h"
 #import "imageStack.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface previewViewController ()
 - (IBAction)findIndex:(UITapGestureRecognizer *)recognize;
 @property (weak, nonatomic) IBOutlet UIButton *homeButton;
 - (IBAction)homeButtonAction:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UIButton *saveButton;
+- (IBAction)onSave:(id)sender;
 
 @end
 
@@ -197,4 +200,122 @@
     previous=0;
     [[[imageStack sharedInstance] focalStackUImage] removeAllObjects];
 }
+
+-(void)addAssetURL:(NSURL*)assetURL toAlbum:(NSString*)albumName withCompletionBlock:(SaveImageCompletion)completionBlock
+{
+    __block BOOL albumWasFound = NO;
+    
+    ALAssetsLibrary *library= [[ALAssetsLibrary alloc] init];
+    
+    //search all photo albums in the library
+    [library enumerateGroupsWithTypes:ALAssetsGroupAlbum
+                           usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+                               
+                               //compare the names of the albums
+                               if ([albumName compare: [group valueForProperty:ALAssetsGroupPropertyName]]==NSOrderedSame) {
+                                   
+                                   //target album is found
+                                   albumWasFound = YES;
+                                   
+                                   //get a hold of the photo's asset instance
+                                   [library assetForURL: assetURL
+                                            resultBlock:^(ALAsset *asset) {
+                                                
+                                                //add photo to the target album
+                                                [group addAsset: asset];
+                                                
+                                                //run the completion block
+                                                completionBlock(nil);
+                                                
+                                            } failureBlock: completionBlock];
+                                   
+                                   //album was found, bail out of the method
+                                   return;
+                               }
+                               
+                               if (group==nil && albumWasFound==NO) {
+                                   //photo albums are over, target album does not exist, thus create it
+                                   
+                                   __weak ALAssetsLibrary* weakSelf = library;
+                                   
+                                   //create new assets album
+                                   [library addAssetsGroupAlbumWithName:albumName
+                                                            resultBlock:^(ALAssetsGroup *group) {
+                                                                
+                                                                //get the photo's instance
+                                                                [weakSelf assetForURL: assetURL
+                                                                          resultBlock:^(ALAsset *asset) {
+                                                                              
+                                                                              //add photo to the newly created album
+                                                                              [group addAsset: asset];
+                                                                              
+                                                                              //call the completion block
+                                                                              completionBlock(nil);
+                                                                              
+                                                                          } failureBlock: completionBlock];
+                                                                
+                                                            } failureBlock: completionBlock];
+                                   
+                                   //should be the last iteration anyway, but just in case
+                                   return;
+                               }
+                               
+                           } failureBlock: completionBlock];
+    
+}
+
+
+- (IBAction)onSave:(id)sender {
+    
+    
+    extern int sampleCount;
+    
+    NSString *location = @"sample";
+    location = [NSString stringWithFormat:@"%@%i", location, sampleCount];
+    
+    [[[ALAssetsLibrary alloc] init] addAssetsGroupAlbumWithName:location
+     
+                                                    resultBlock:^(ALAssetsGroup *group)
+     {
+         NSLog(@"added album");
+     }
+                                                   failureBlock:^(NSError *error) {
+                                                       NSLog(@"error adding album");
+                                                   }];
+    
+
+ 
+    
+    int i=0;
+    int count = [[[imageStack sharedInstance] focalStackUImage] count];
+    for (i=0; i<count;i++)
+    {
+        /* SC3653 - writes file to a given folder. Commenting temporarily to check for global focal Stack */
+        
+        UIImage *temp= [[[imageStack sharedInstance] focalStackUImage] objectAtIndex:i];
+        
+        [[[ALAssetsLibrary alloc] init] writeImageToSavedPhotosAlbum:[temp CGImage] orientation:(ALAssetOrientation)[temp imageOrientation] completionBlock:^(NSURL *assetURL, NSError *error)
+         
+                                 {
+                                     if (error) {
+                                         NSLog(@"error");
+                                     } else {
+                                         NSLog(@"url %@", assetURL);
+         
+                                         //add the asset to the custom photo album
+                                         [self addAssetURL: assetURL
+                                                   toAlbum:location
+                                             withCompletionBlock:^(NSError *error) {
+                                           if (error!=nil) {
+                                               NSLog(@"Big error: %@", [error description]);
+                                           }
+                                       }];
+                                     }
+                                 }];
+
+    }
+    
+    sampleCount=sampleCount+1;
+    [_homeButton sendActionsForControlEvents: UIControlEventTouchUpInside];
+   }
 @end

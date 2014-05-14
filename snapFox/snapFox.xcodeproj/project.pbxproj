@@ -51,6 +51,13 @@
 		ECF62762192286FE00C5280C /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECF62761192286FE00C5280C /* FirstViewController.m */; };
 		ECF627651922B58B00C5280C /* viewViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = ECF627641922B58B00C5280C /* viewViewController.mm */; };
 		ECF627671922D25600C5280C /* focal_map.png in Resources */ = {isa = PBXBuildFile; fileRef = ECF627661922D25600C5280C /* focal_map.png */; };
+		ECF628AB1923BD0200C5280C /* logo_120x120.png in Resources */ = {isa = PBXBuildFile; fileRef = ECF628A41923BD0200C5280C /* logo_120x120.png */; };
+		ECF628AC1923BD0200C5280C /* logo_128x128.png in Resources */ = {isa = PBXBuildFile; fileRef = ECF628A51923BD0200C5280C /* logo_128x128.png */; };
+		ECF628AD1923BD0200C5280C /* logo_58x58.png in Resources */ = {isa = PBXBuildFile; fileRef = ECF628A61923BD0200C5280C /* logo_58x58.png */; };
+		ECF628AE1923BD0200C5280C /* logo_80x80.png in Resources */ = {isa = PBXBuildFile; fileRef = ECF628A71923BD0200C5280C /* logo_80x80.png */; };
+		ECF628AF1923BD0200C5280C /* screen.png in Resources */ = {isa = PBXBuildFile; fileRef = ECF628A81923BD0200C5280C /* screen.png */; };
+		ECF628B01923BD0200C5280C /* screen1.png in Resources */ = {isa = PBXBuildFile; fileRef = ECF628A91923BD0200C5280C /* screen1.png */; };
+		ECF628B11923BD0200C5280C /* screen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ECF628AA1923BD0200C5280C /* screen@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -111,6 +118,13 @@
 		ECF627631922B58B00C5280C /* viewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = viewViewController.h; sourceTree = "<group>"; };
 		ECF627641922B58B00C5280C /* viewViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = viewViewController.mm; sourceTree = "<group>"; };
 		ECF627661922D25600C5280C /* focal_map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = focal_map.png; path = stack/focal_map.png; sourceTree = "<group>"; };
+		ECF628A41923BD0200C5280C /* logo_120x120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_120x120.png; sourceTree = "<group>"; };
+		ECF628A51923BD0200C5280C /* logo_128x128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_128x128.png; sourceTree = "<group>"; };
+		ECF628A61923BD0200C5280C /* logo_58x58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_58x58.png; sourceTree = "<group>"; };
+		ECF628A71923BD0200C5280C /* logo_80x80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_80x80.png; sourceTree = "<group>"; };
+		ECF628A81923BD0200C5280C /* screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screen.png; sourceTree = "<group>"; };
+		ECF628A91923BD0200C5280C /* screen1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screen1.png; sourceTree = "<group>"; };
+		ECF628AA1923BD0200C5280C /* screen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screen@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +194,7 @@
 		2F360BAC17692C4700D9A404 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				ECF628A31923BD0200C5280C /* images */,
 				ECF627661922D25600C5280C /* focal_map.png */,
 				ECEC6B15191CDEC300FB3EEB /* frame1.jpg */,
 				ECEC6B16191CDEC300FB3EEB /* frame10.jpg */,
@@ -213,6 +228,20 @@
 				2F360BB117692C4700D9A404 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		ECF628A31923BD0200C5280C /* images */ = {
+			isa = PBXGroup;
+			children = (
+				ECF628A41923BD0200C5280C /* logo_120x120.png */,
+				ECF628A51923BD0200C5280C /* logo_128x128.png */,
+				ECF628A61923BD0200C5280C /* logo_58x58.png */,
+				ECF628A71923BD0200C5280C /* logo_80x80.png */,
+				ECF628A81923BD0200C5280C /* screen.png */,
+				ECF628A91923BD0200C5280C /* screen1.png */,
+				ECF628AA1923BD0200C5280C /* screen@2x.png */,
+			);
+			path = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -278,8 +307,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F360BC117692C4700D9A404 /* Images.xcassets in Resources */,
+				ECF628AF1923BD0200C5280C /* screen.png in Resources */,
 				ECEC6B13191CC0CF00FB3EEB /* lena.jpg in Resources */,
 				ECEC6B3B191CDEC300FB3EEB /* frame21.jpg in Resources */,
+				ECF628B11923BD0200C5280C /* screen@2x.png in Resources */,
 				ECEC6B33191CDEC300FB3EEB /* frame14.jpg in Resources */,
 				ECEC6B36191CDEC300FB3EEB /* frame17.jpg in Resources */,
 				ECEC6B3E191CDEC300FB3EEB /* frame24.jpg in Resources */,
@@ -289,18 +320,22 @@
 				ECEC6B31191CDEC300FB3EEB /* frame12.jpg in Resources */,
 				ECEC6B41191CDEC300FB3EEB /* frame4.jpg in Resources */,
 				ECEC6B3C191CDEC300FB3EEB /* frame22.jpg in Resources */,
+				ECF628B01923BD0200C5280C /* screen1.png in Resources */,
 				ECEC6B32191CDEC300FB3EEB /* frame13.jpg in Resources */,
 				ECEC6B34191CDEC300FB3EEB /* frame15.jpg in Resources */,
 				2F45C1D5177676670052A7F9 /* Main_iPhone.storyboard in Resources */,
 				ECEC6B46191CDEC300FB3EEB /* frame9.jpg in Resources */,
 				ECEC6B42191CDEC300FB3EEB /* frame5.jpg in Resources */,
+				ECF628AB1923BD0200C5280C /* logo_120x120.png in Resources */,
 				ECEC6B3D191CDEC300FB3EEB /* frame23.jpg in Resources */,
+				ECF628AC1923BD0200C5280C /* logo_128x128.png in Resources */,
 				ECEC6B40191CDEC300FB3EEB /* frame3.jpg in Resources */,
 				ECEC6B37191CDEC300FB3EEB /* frame18.jpg in Resources */,
 				2F45C1D6177676670052A7F9 /* Main_iPad.storyboard in Resources */,
 				ECEC6B3A191CDEC300FB3EEB /* frame20.jpg in Resources */,
 				ECEC6B43191CDEC300FB3EEB /* frame6.jpg in Resources */,
 				ECEC6B45191CDEC300FB3EEB /* frame8.jpg in Resources */,
+				ECF628AE1923BD0200C5280C /* logo_80x80.png in Resources */,
 				ECEC6B35191CDEC300FB3EEB /* frame16.jpg in Resources */,
 				ECEC6B2E191CDEC300FB3EEB /* frame1.jpg in Resources */,
 				ECEC6B3F191CDEC300FB3EEB /* frame25.jpg in Resources */,
@@ -308,6 +343,7 @@
 				ECEC6B38191CDEC300FB3EEB /* frame19.jpg in Resources */,
 				ECEC6B44191CDEC300FB3EEB /* frame7.jpg in Resources */,
 				ECF627671922D25600C5280C /* focal_map.png in Resources */,
+				ECF628AD1923BD0200C5280C /* logo_58x58.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

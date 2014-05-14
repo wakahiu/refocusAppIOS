@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="-13" width="320" height="573"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="lena.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="dlf-eg-z7i">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="screen.png" translatesAutoresizingMaskIntoConstraints="NO" id="dlf-eg-z7i">
                                         <rect key="frame" x="0.0" y="62" width="320" height="354"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -29,7 +29,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2nS-77-lU5">
                                         <rect key="frame" x="20" y="424" width="55" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Capture">
+                                        <state key="normal" title="Snap...">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -143,7 +143,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JI8-7Z-lWW">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JI8-7Z-lWW">
                                         <rect key="frame" x="124" y="512" width="72" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
@@ -151,7 +151,7 @@
                                             <constraint firstAttribute="width" constant="72" id="Omq-Uf-Bqn"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="FoQus">
+                                        <state key="normal" backgroundImage="logo_58x58.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -231,7 +231,7 @@
                                 </connections>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BYZ-Tu-9PO">
-                                <rect key="frame" x="137" y="445" width="41" height="30"/>
+                                <rect key="frame" x="20" y="445" width="41" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Home">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -241,6 +241,16 @@
                                     <segue destination="BQ5-0x-BiU" kind="modal" modalTransitionStyle="crossDissolve" id="eLa-Vx-Cko"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rg0-cB-cmR">
+                                <rect key="frame" x="254" y="445" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Save">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onSave:" destination="AHb-OY-Kzc" eventType="touchUpInside" id="d5Q-Y6-eTH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -248,6 +258,7 @@
                     <connections>
                         <outlet property="displayImage" destination="Dgm-y3-zbA" id="Ii3-BX-V0j"/>
                         <outlet property="homeButton" destination="BYZ-Tu-9PO" id="3dG-FA-U3L"/>
+                        <outlet property="saveButton" destination="Rg0-cB-cmR" id="SkV-uu-2tq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4nE-np-0VP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -261,7 +272,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="lena.jpg" width="512" height="512"/>
+        <image name="logo_58x58.png" width="58" height="58"/>
+        <image name="screen.png" width="640" height="960"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -269,6 +281,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Icc-Ad-5sB"/>
+        <segue reference="eLa-Vx-Cko"/>
     </inferredMetricsTieBreakers>
 </document>
