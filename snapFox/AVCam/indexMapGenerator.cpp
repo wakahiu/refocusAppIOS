@@ -117,12 +117,18 @@ Mat indexMapGenerator::generateFocalIndexMap(vector<Mat> imageStack)
         lap_x=abs(lap_x);
 		lap_y=abs(lap_y);
         
+        //writing laplacian_x and laplacian_y
+        
+        
+        
         Mat modLaplacian;
 		addWeighted(lap_x,1,lap_y,1,0.0,modLaplacian);
         
         //locally boosting all pixel intensities based on a 3X3 neighborhood
 		Mat boosted;
 		filter2D(modLaplacian, boosted, -1, boostingFilter);
+        
+        
         
         //averaging values of the focal measure: average filter preferred ouver gaussian filter as gaussian does not resolve the issue of noisy patches
         
